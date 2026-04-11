@@ -35,11 +35,11 @@ const Navbar = () => {
           >
               <img
                 src="/logo-n.png"
-                alt="Mepe MDA Logo"
+                alt="Mepe MDA Logo" 
                 className="w-28 h-28 object-contain drop-shadow-md transition-all"
               />
           </Link>
-
+ 
           {/* Desktop Links */}
           <ul className="hidden lg:flex gap-10 items-center">
             {links.map((link) => {

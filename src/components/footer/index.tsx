@@ -23,20 +23,12 @@ const Footer = () => {
         {/* Brand Column */}
         <div className="space-y-10">
           <Link to="/" className="flex items-center gap-4 group">
-            <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center backdrop-blur-md border border-white/10 group-hover:scale-105 transition-transform duration-500">
+            <div className="w-[240px] h-[154px]  flex items-center justify-center backdrop-blur-md  group-hover:scale-105 transition-transform duration-500">
               <img
-                src="/logo-new.png"
+                src="/logo-n.png"
                 alt="Mepe MDA Logo"
-                className="w-14 h-14 object-contain "
+                className="w-[240px] h-[154px] object-contain " 
               />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display text-2xl tracking-tighter">
-                MEPE
-              </span>
-              <span className="text-mda-pink text-[10px] font-bold tracking-[0.3em] uppercase">
-                Development Assoc.
-              </span>
             </div>
           </Link>
           <p className="text-white/40 leading-relaxed font-body text-base max-w-sm">
@@ -179,7 +171,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="group"
           >
-            Designed & Developed by{" "}
+            Powered by{" "}
             <span className="text-white/400 group-hover:text-mda-pink transition-colors font-bold">
               CYBASE GHANA
             </span>
