@@ -50,7 +50,7 @@ const History = () => {
           <div className="order-1 lg:order-2 relative group max-w-lg mx-auto lg:max-w-none">
             <div className="aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl relative z-10 border-4 md:border-8 border-mda-cream">
               <img
-                src="/456251856_18061206280720953_4691208955845474968_n.jpg"
+                src={new URL("../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg", import.meta.url).href}
                 alt="Mepe Historical Site"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />

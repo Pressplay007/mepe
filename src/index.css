@@ -37,11 +37,11 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/40 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(93,26,26,0.05)];
+    @apply bg-white/40 backdrop-blur-md border border-white/40 shadow-xl;
   }
 
   .glass-nav {
-    @apply bg-mda-cream/80 backdrop-blur-md border-b border-mda-maroon/5;
+    @apply bg-mda-cream/90 backdrop-blur border-b border-mda-maroon/5;
   }
 
   .text-glow {

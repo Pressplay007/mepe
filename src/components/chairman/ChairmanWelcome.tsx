@@ -15,6 +15,7 @@ const ChairmanWelcome = () => {
                   src="/chairman.jpeg"
                   alt="Chairman of MDA"
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
+                  loading="lazy"
                 />
               </div>
             </div>

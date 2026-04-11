@@ -5,7 +5,7 @@ const Projects = () => {
     {
       title: "Water Resource & Agriculture",
       category: "Sustainability",
-      image: "/455991774_18061206271720953_6194218305811081143_n.jpg",
+      image: new URL("../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg", import.meta.url).href,
       status: "Early Stage",
       progress: 1,
       Icon: Droplets,
@@ -13,7 +13,7 @@ const Projects = () => {
     {
       title: "Youth Skills & Entrepreneurship",
       category: "Empowerment",
-      image: "/524445973_1341760967957245_7840297303174955587_n.jpg",
+      image: new URL("../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg", import.meta.url).href,
       status: "Planned",
       progress: 1,
       Icon: Laptop,
@@ -21,7 +21,7 @@ const Projects = () => {
     {
       title: "Education Development",
       category: "Education",
-      image: "/456184220_18061206241720953_5588583274442341449_n.jpg",
+      image: new URL("../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg", import.meta.url).href,
       status: "Planned",
       progress: 1,
       Icon: BookOpen,

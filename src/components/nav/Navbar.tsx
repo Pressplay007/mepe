@@ -33,11 +33,11 @@ const Navbar = () => {
             className="flex items-center gap-3 font-bold text-2xl text-mda-maroon hover:opacity-80 transition-all relative z-[60] hover:scale-105 active:scale-95"
             onClick={() => setIsMenuOpen(false)}
           >
-            <img
-              src="/logo-new.png"
-              alt="Mepe MDA Logo"
-              className={`w-24 h-26 object-contain drop-shadow-md transition-all ${isMenuOpen ? "" : ""}`}
-            />
+              <img
+                src="/logo-n.png"
+                alt="Mepe MDA Logo"
+                className="w-28 h-28 object-contain drop-shadow-md transition-all"
+              />
           </Link>
 
           {/* Desktop Links */}
@@ -104,9 +104,10 @@ const Navbar = () => {
             className={`transition-all duration-1000 delay-300 ${isMenuOpen ? "opacity-20 scale-100" : "opacity-0 scale-90"}`}
           >
             <img
-              src="/logo-new.png"
+              src="/logo-n.png"
               alt=""
-              className="w-32 brightness-0 "
+              className="w-32 brightness-0 opacity-50"
+              loading="lazy"
             />
           </div>
 
