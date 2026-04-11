@@ -174,7 +174,7 @@ const Footer = () => {
             User Terms
           </Link>
           <a
-            href="https://cybaseghana.com"
+            href="https://cybasegh.com"
             target="_blank"
             rel="noopener noreferrer"
             className="group"
