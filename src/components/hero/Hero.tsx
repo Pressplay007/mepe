@@ -91,7 +91,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="absolute -bottom-10 right-10 glass-card p-8 rounded-3xl border-white/20">
+          {/* <div className="absolute -bottom-10 right-10 glass-card p-8 rounded-3xl border-white/20">
             <div className="flex items-center gap-4">
               <div className="flex -space-x-3">
                 {[1, 2, 3].map((i) => (
@@ -111,7 +111,7 @@ const Hero = () => {
                 +100 Volunteers
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
