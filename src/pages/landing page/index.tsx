@@ -5,6 +5,7 @@ import History from "../../components/history/History";
 import Events from "../../components/events/Events";
 import Projects from "../../components/projects/Projects";
 import News from "../../components/news/News";
+import Team from "../../components/team";
 import FinalCTA from "../../components/cta/FinalCTA";
 
 const LandingPage = () => {
@@ -21,6 +22,7 @@ const LandingPage = () => {
         <Events />
         <Projects />
         <News />
+        <Team />
         <FinalCTA />
       </div>
     </>

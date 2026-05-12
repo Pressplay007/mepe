@@ -4,6 +4,7 @@ import Navbar from "./components/nav/Navbar";
 import Footer from "./components/footer";
 import MainRoutes from "./routes/main-routes";
 import ScrollToTop from "./components/common/ScrollToTop";
+import AnnouncementPopup from "./components/announcements/AnnouncementPopup";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <MainRoutes />
           </main>
           <Footer />
+          <AnnouncementPopup />
         </div>
       </Router>
     </HelmetProvider>

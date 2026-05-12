@@ -11,6 +11,7 @@ import VisitMepePage from "../pages/visit mepe";
 import PrivacyPolicy from "../pages/legal/PrivacyPolicy";
 import TermsOfService from "../pages/legal/TermsOfService";
 import GalleryPage from "../pages/gallery";
+import AnnouncementsPage from "../pages/announcements";
 
 const MainRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const MainRoutes = () => {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/gallery" element={<GalleryPage />} />
+      <Route path="/announcements" element={<AnnouncementsPage />} />
     </Routes>
   );
 };
