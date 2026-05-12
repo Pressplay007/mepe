@@ -1,6 +1,7 @@
 import { Trophy, Users, Shield, ArrowRight } from "lucide-react";
 import SEO from "../../components/common/SEO";
 import FinalCTA from "../../components/cta/FinalCTA";
+import Team from "../../components/team";
 
 const AboutPage = () => {
   return (
@@ -109,7 +110,7 @@ const AboutPage = () => {
             ].map((leader, i) => (
               <div
                 key={i}
-                className="glass-card p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border-white/5 group hover:border-white/20 transition-all duration-700 hover:-translate-y-2"
+                className="glass-card p-8 md:p-10 rounded-[8px] md:rounded-[10px] border-white/5 group hover:border-white/20 transition-all duration-700 hover:-translate-y-2"
               >
                 <div className="text-[8px] md:text-[10px] font-bold tracking-[0.3em] text-mda-pink mb-6 md:mb-10 uppercase transition-colors">
                   {leader.role}
@@ -124,6 +125,11 @@ const AboutPage = () => {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Executive Team Section */}
+        <section className="bg-white">
+          <Team />
         </section>
 
         {/* Core Pillars */}
@@ -152,7 +158,7 @@ const AboutPage = () => {
                   className="space-y-6 md:space-y-8 group flex flex-col items-center lg:items-start"
                 >
                   <div
-                    className="w-20 md:w-24 h-20 md:h-24 glass-card rounded-2xl md:rounded-3xl flex items-center justify-center transition-all duration-700 group-hover:bg-mda-maroon animate-float"
+                    className="w-20 md:w-24 h-20 md:h-24 glass-card rounded-[20px] md:rounded-[10px] flex items-center justify-center transition-all duration-700 group-hover:bg-mda-maroon animate-float"
                     style={{ animationDelay: `${i * 300}ms` }}
                   >
                     <pillar.icon className="w-8 md:w-10 h-8 md:h-10 text-mda-maroon transition-colors group-hover:text-mda-pink" />
