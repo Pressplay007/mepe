@@ -1,3 +1,5 @@
+import Chairman from "../../assets/team/bismark.jpg";
+
 const ChairmanWelcome = () => {
   return (
     <section className="py-16 md:py-32 bg-mda-cream relative overflow-hidden">
@@ -72,7 +74,7 @@ const ChairmanWelcome = () => {
             <div className="flex items-center gap-4 md:gap-6 pt-4">
               <div className="w-12 md:w-16 h-12 md:h-16 rounded-full overflow-hidden border-2 border-mda-pink shadow-lg">
                 <img
-                  src="/chairman.jpeg"
+                  src={Chairman}
                   className="w-full h-full object-cover"
                 />
               </div>
