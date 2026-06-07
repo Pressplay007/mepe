@@ -18,7 +18,7 @@ export const projects: Project[] = [
     progress: 65,
     description: 'Construction of a multi-purpose administrative hub featuring an ICT center, library, and conference hall.',
     lead: 'Michael Fosu',
-    budget: '$150,000'
+    budget: 'GHS 150,000'
   },
   {
     id: '2',
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     progress: 100,
     description: 'Establishment of a practical training center for youth to learn modern aquaculture techniques.',
     lead: 'Bismark Fiifi Tetteh',
-    budget: '$45,000'
+    budget: 'GHS 45,000'
   },
   {
     id: '3',
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     progress: 15,
     description: 'A multi-phase project combining a cultural museum, village, and craft markets to preserve Mepe heritage.',
     lead: 'Francis Ladzaglah',
-    budget: '$200,000'
+    budget: 'GHS 200,000'
   },
   {
     id: '4',
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     progress: 40,
     description: 'Fundraising and distribution of financial support for tertiary and technical students.',
     lead: 'Anna Enyonam Awuku',
-    budget: '$30,000'
+    budget: 'GHS 30,000'
   },
   {
     id: '5',
@@ -58,6 +58,6 @@ export const projects: Project[] = [
     progress: 80,
     description: 'Creating a bulk buying system and financial training network for local traders.',
     lead: 'Christiana Dziedzorm Kwadzoti',
-    budget: '$10,000'
+    budget: 'GHS 10,000'
   }
 ];

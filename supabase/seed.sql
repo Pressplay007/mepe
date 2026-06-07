@@ -34,19 +34,19 @@ on conflict do nothing;
 insert into public.projects (title, category, status, progress, description, lead, budget) values
   ('MDA Office Complex', 'Infrastructure', 'In Progress', 65,
    'Construction of a multi-purpose administrative hub featuring an ICT center, library, and conference hall.',
-   'Michael Fosu', '$150,000'),
+   'Michael Fosu', 'GHS 150,000'),
   ('Fish Farming Training Farm', 'Agriculture', 'Completed', 100,
    'Establishment of a practical training center for youth to learn modern aquaculture techniques.',
-   'Bismark Fiifi Tetteh', '$45,000'),
+   'Bismark Fiifi Tetteh', 'GHS 45,000'),
   ('Heritage Park & Museum', 'Tourism', 'Planned', 15,
    'A multi-phase project combining a cultural museum, village, and craft markets to preserve Mepe heritage.',
-   'Francis Ladzaglah', '$200,000'),
+   'Francis Ladzaglah', 'GHS 200,000'),
   ('Scholarship Fund 2026', 'Education', 'In Progress', 40,
    'Fundraising and distribution of financial support for tertiary and technical students.',
-   'Anna Enyonam Awuku', '$30,000'),
+   'Anna Enyonam Awuku', 'GHS 30,000'),
   ('Local Business Cooperative', 'Economic', 'In Progress', 80,
    'Creating a bulk buying system and financial training network for local traders.',
-   'Christiana Dziedzorm Kwadzoti', '$10,000')
+   'Christiana Dziedzorm Kwadzoti', 'GHS 10,000')
 on conflict do nothing;
 
 insert into public.announcements (title, date_label, category, summary, content, is_official, status) values

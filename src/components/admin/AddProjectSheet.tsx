@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { User, DollarSign} from "lucide-react";
+import { User, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import type { Project } from "../../data/projects";
 import {
@@ -162,7 +162,7 @@ const AddProjectSheet = ({ isOpen, onClose, onAdd }: AddProjectSheetProps) => {
               Budget Allocation
             </label>
             <div className="relative group">
-              <DollarSign
+              <Wallet
                 className="absolute left-5 top-5 text-mda-maroon/20 group-focus-within:text-mda-pink transition-colors"
                 size={18}
               />

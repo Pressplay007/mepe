@@ -25,6 +25,7 @@ import MediaManagement from "../pages/admin/MediaManagement";
 import AdminManagement from "../pages/admin/AdminManagement";
 import SettingsPage from "../pages/admin/SettingsPage";
 import AuthGuard from "../components/admin/AuthGuard";
+import SuperAdminGuard from "../components/admin/SuperAdminGuard";
 
 const MainRoutes = () => {
   return (
@@ -54,7 +55,12 @@ const MainRoutes = () => {
           <Route path="/admin/events" element={<EventsManagement />} />
           <Route path="/admin/projects" element={<ProjectsManagement />} />
           <Route path="/admin/media" element={<MediaManagement />} />
-          <Route path="/admin/administrators" element={<AdminManagement />} />
+          <Route element={<SuperAdminGuard />}>
+            <Route
+              path="/admin/administrators"
+              element={<AdminManagement />}
+            />
+          </Route>
           <Route path="/admin/settings" element={<SettingsPage />} />
         </Route>
       </Route>

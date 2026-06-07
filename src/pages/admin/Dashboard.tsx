@@ -70,11 +70,11 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-10 animate-reveal ">
+    <div className="space-y-6 md:space-y-10 animate-reveal ">
       {/* Welcome Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-          <h1 className="text-4xl font-display text-mda-maroon uppercase leading-tight">
+          <h1 className="text-3xl md:text-4xl font-display text-mda-maroon uppercase leading-tight">
             SYSTEM <span className="text-mda-pink">OVERVIEW</span>
           </h1>
           <p className="text-mda-maroon/50 mt-1 font-medium tracking-wide">
@@ -114,10 +114,10 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
         {/* Recent Activity */}
         <div className="lg:col-span-2 bg-white rounded-3xl border border-mda-maroon/5 shadow-sm overflow-hidden">
-          <div className="p-8 border-b border-mda-maroon/5 flex justify-between items-center">
+          <div className="p-5 md:p-8 border-b border-mda-maroon/5 flex justify-between items-center">
             <h3 className="text-sm font-bold uppercase tracking-widest text-mda-maroon">
               Recent Activity
             </h3>

@@ -5,7 +5,7 @@ import {
   Edit2,
   Trash2,
   User,
-  DollarSign,
+  Wallet,
   Filter,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -217,7 +217,7 @@ const ProjectsManagement = () => {
                   </td>
                   <td className="px-8 py-6">
                     <div className="flex items-center gap-2 text-mda-maroon/60">
-                      <DollarSign size={14} className="text-mda-maroon/20" />
+                      <Wallet size={14} className="text-mda-maroon/20" />
                       <span className="text-xs font-bold uppercase  text-mda-maroon">
                         {project.budget || "N/A"}
                       </span>
