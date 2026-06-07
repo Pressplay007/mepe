@@ -1,41 +1,69 @@
-import { ArrowRight, Droplets, Laptop, BookOpen } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Droplets,
+  Laptop,
+  BookOpen,
+  Landmark,
+  Store,
+  Compass,
+} from "lucide-react";
+import { projects as fallbackProjects, type Project } from "../../data/projects";
+import { listProjects } from "../../services/projects";
+
+const cardImages = [
+  new URL(
+    "../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg",
+    import.meta.url,
+  ).href,
+  new URL(
+    "../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg",
+    import.meta.url,
+  ).href,
+  new URL(
+    "../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg",
+    import.meta.url,
+  ).href,
+  new URL(
+    "../../assets/gallery/456132438_18061206193720953_3368855995947669246_n.jpg",
+    import.meta.url,
+  ).href,
+  new URL(
+    "../../assets/gallery/456314736_18061206244720953_3574851341763144433_n.jpg",
+    import.meta.url,
+  ).href,
+  new URL(
+    "../../assets/gallery/505730882_1301467045319971_4163705806737903282_n.jpg",
+    import.meta.url,
+  ).href,
+];
+
+const iconForCategory = (category: string) => {
+  const c = category.toLowerCase();
+  if (c.includes("water") || c.includes("agri")) return Droplets;
+  if (c.includes("edu")) return BookOpen;
+  if (c.includes("infra")) return Landmark;
+  if (c.includes("econ") || c.includes("business") || c.includes("trade"))
+    return Store;
+  if (c.includes("youth") || c.includes("skill") || c.includes("tech"))
+    return Laptop;
+  return Compass;
+};
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Water Resource & Agriculture",
-      category: "Sustainability",
-      image: new URL(
-        "../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg",
-        import.meta.url,
-      ).href,
-      status: "Early Stage",
-      progress: 1,
-      Icon: Droplets,
-    },
-    {
-      title: "Youth Skills & Entrepreneurship",
-      category: "Empowerment",
-      image: new URL(
-        "../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg",
-        import.meta.url,
-      ).href,
-      status: "Planned",
-      progress: 1,
-      Icon: Laptop,
-    },
-    {
-      title: "Education Development",
-      category: "Education",
-      image: new URL(
-        "../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg",
-        import.meta.url,
-      ).href,
-      status: "Planned",
-      progress: 1,
-      Icon: BookOpen,
-    },
-  ];
+  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
+
+  useEffect(() => {
+    listProjects()
+      .then((data) => {
+        if (data.length > 0) setProjects(data);
+      })
+      .catch(() => {
+        // Keep the static fallback if the backend is unavailable.
+      });
+  }, []);
+
+  const featured = projects.slice(0, 6);
 
   return (
     <section className="py-16 md:py-32 premium-gradient text-white relative overflow-hidden">
@@ -67,13 +95,15 @@ const Projects = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative z-10">
-        {projects.map((project, index) => (
-          <div key={index} className="group relative">
+        {featured.map((project, index) => {
+          const Icon = iconForCategory(project.category);
+          return (
+          <div key={project.id} className="group relative">
             {/* Project Card */}
             <div className="glass-card rounded-[2rem] md:rounded-[3rem] p-3 md:p-4 h-full border-white/5 hover:border-white/20 transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)]">
               <div className="aspect-[14/9] rounded-[1.5rem] md:rounded-[2.2rem] overflow-hidden relative mb-6 md:mb-8">
                 <img
-                  src={project.image}
+                  src={cardImages[index % cardImages.length]}
                   className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                   alt={project.title}
                 />
@@ -84,7 +114,7 @@ const Projects = () => {
                     {project.category}
                   </span>
                   <div className="bg-mda-pink text-white px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[8px] md:text-[9px] font-bold tracking-widest uppercase flex items-center gap-1.5 md:gap-2 shadow-lg shadow-mda-pink/30">
-                    <project.Icon className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                    <Icon className="w-2.5 h-2.5 md:w-3 md:h-3" />
                     {project.status}
                   </div>
                 </div>
@@ -121,7 +151,8 @@ const Projects = () => {
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

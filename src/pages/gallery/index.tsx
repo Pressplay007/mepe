@@ -9,12 +9,24 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import SEO from "../../components/common/SEO";
+import { listMedia } from "../../services/media";
+
+interface GalleryImage {
+  src: string;
+  title: string;
+}
+
+interface GalleryVideo {
+  category: string;
+  url: string;
+  isLocal: boolean;
+}
 
 const Gallery = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
 
-  const images = [
+  const fallbackImages: GalleryImage[] = [
     {
       src: new URL(
         "../../assets/gallery/456251856_18061206280720953_4691208955845474968_n.jpg",
@@ -238,7 +250,7 @@ const Gallery = () => {
     },
   ];
 
-  const videos = [
+  const fallbackVideos: GalleryVideo[] = [
     {
       // title: "The Heart of Mepe",
       category: "Documentary",
@@ -252,6 +264,35 @@ const Gallery = () => {
       isLocal: true,
     },
   ];
+
+  const [images, setImages] = useState<GalleryImage[]>(fallbackImages);
+  const [videos, setVideos] = useState<GalleryVideo[]>(fallbackVideos);
+
+  useEffect(() => {
+    listMedia()
+      .then((media) => {
+        const imgs = media
+          .filter((m) => m.type === "Image")
+          .map((m) => ({
+            src: m.url,
+            title: m.name.replace(/\.[^./\\]+$/, ""),
+          }));
+        const vids = media
+          .filter((m) =>
+            ["MP4", "MOV", "WEBM", "AVI", "MKV", "M4V"].includes(m.type),
+          )
+          .map((m) => ({
+            category: "Documentary",
+            url: m.url,
+            isLocal: true,
+          }));
+        if (imgs.length > 0) setImages(imgs);
+        if (vids.length > 0) setVideos(vids);
+      })
+      .catch(() => {
+        // Keep the static fallback if the backend is unavailable.
+      });
+  }, []);
 
   const nextImage = () => {
     if (selectedIndex !== null) {

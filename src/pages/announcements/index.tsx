@@ -1,11 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SEO from "../../components/common/SEO";
-import { announcements, type Announcement } from "../../data/announcements";
+import {
+  announcements as fallbackAnnouncements,
+  type Announcement,
+} from "../../data/announcements";
+import { listAnnouncements } from "../../services/announcements";
 import { X, FileText, Calendar, Tag } from "lucide-react";
 
 const AnnouncementsPage = () => {
   const [selectedAnnouncement, setSelectedAnnouncement] =
     useState<Announcement | null>(null);
+  const [announcements, setAnnouncements] = useState<Announcement[]>(
+    fallbackAnnouncements,
+  );
+
+  useEffect(() => {
+    listAnnouncements()
+      .then((data) => {
+        const published = data.filter(
+          (a) => !a.status || a.status === "Published",
+        );
+        if (published.length > 0) setAnnouncements(published);
+      })
+      .catch(() => {
+        // Keep the static fallback if the backend is unavailable.
+      });
+  }, []);
 
   return (
     <div className="bg-mda-cream min-h-screen pt-32 pb-24">

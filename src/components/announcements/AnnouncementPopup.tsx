@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { X, ArrowRight, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { type Announcement } from '../../data/announcements';
+import { listAnnouncements } from '../../services/announcements';
 
 const AnnouncementPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const [latest, setLatest] = useState<Announcement | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,6 +15,19 @@ const AnnouncementPopup = () => {
     }, 2000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    listAnnouncements()
+      .then((data) => {
+        const published = data.find(
+          (a) => !a.status || a.status === "Published",
+        );
+        if (published) setLatest(published);
+      })
+      .catch(() => {
+        // Keep the static fallback copy if the backend is unavailable.
+      });
   }, []);
 
   const handleDismiss = () => {
@@ -49,8 +65,8 @@ const AnnouncementPopup = () => {
                 <Bell size={16} className="text-mda-pink animate-pulse" />
              </div>
              <p className="text-[8px] md:text-[10px] font-bold text-mda-pink uppercase tracking-[0.3em] mb-1 md:mb-2">Notice</p>
-             <h3 className="text-xl md:text-2xl font-display text-white leading-tight">
-               EXECUTIVE <br className="hidden md:block" /> MEMBERSHIP
+             <h3 className="text-xl md:text-2xl font-display text-white leading-tight uppercase">
+               {latest ? latest.category : (<>EXECUTIVE <br className="hidden md:block" /> MEMBERSHIP</>)}
              </h3>
           </div>
         </div>
@@ -58,13 +74,15 @@ const AnnouncementPopup = () => {
         {/* Right Side - Content */}
         <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
           <div className="inline-block px-2 py-0.5 bg-mda-maroon/5 text-mda-maroon text-[8px] font-bold uppercase tracking-widest mb-3">
-            CONFIRMED
+            {latest ? latest.date : "CONFIRMED"}
           </div>
-          <h4 className="text-lg md:text-xl font-display text-mda-maroon mb-2 leading-tight uppercase">
-            New Leadership Committee
+          <h4 className="text-lg md:text-xl font-display text-mda-maroon mb-2 leading-tight uppercase line-clamp-2">
+            {latest ? latest.title : "New Leadership Committee"}
           </h4>
-          <p className="text-[10px] md:text-xs font-body text-mda-maroon/60 mb-5 leading-relaxed">
-            The Mepe Development Association has formally constituted its Executive Committee for 2026.
+          <p className="text-[10px] md:text-xs font-body text-mda-maroon/60 mb-5 leading-relaxed line-clamp-3">
+            {latest
+              ? latest.summary
+              : "The Mepe Development Association has formally constituted its Executive Committee for 2026."}
           </p>
 
           <Link 

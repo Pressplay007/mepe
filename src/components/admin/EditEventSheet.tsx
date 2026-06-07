@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from "react";
-import { Calendar, MapPin, Type } from "lucide-react";
+import { MapPin, Type } from "lucide-react";
 import { toast } from "sonner";
 import type { Event } from "../../data/events";
 import {
@@ -7,6 +7,7 @@ import {
   SheetDescription, SheetFooter,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import DateTimePicker from "./DateTimePicker";
 
 
 interface EditEventSheetProps {
@@ -66,12 +67,11 @@ const EditEventSheet = ({ isOpen, onClose, onSave, event }: EditEventSheetProps)
 
           <div className="space-y-3">
             <label className="text-[10px] font-bold uppercase tracking-widest text-mda-maroon/40 ml-1">Date & Time</label>
-            <div className="relative group">
-              <Calendar className="absolute left-5 top-5 text-mda-maroon/20 group-focus-within:text-mda-pink transition-colors" size={18} />
-              <input type="text" required value={edited.date || ""} onChange={(e) => setEdited({ ...edited, date: e.target.value })}
-                className="w-full bg-mda-cream/30 border border-mda-maroon/5 rounded-[10px] py-5 pl-14 pr-6 text-sm text-mda-maroon focus:outline-none focus:border-mda-pink transition-all"
-                placeholder="e.g. October 15, 2026" />
-            </div>
+            <DateTimePicker
+              value={edited.date || ""}
+              onChange={(value) => setEdited({ ...edited, date: value })}
+              placeholder="Select date & time"
+            />
           </div>
 
           <div className="space-y-3">

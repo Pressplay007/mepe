@@ -1,8 +1,19 @@
-
-
-import { teamMembers } from '../../data/team';
+import { useEffect, useState } from 'react';
+import { teamMembers as fallbackMembers, type TeamMember } from '../../data/team';
+import { listTeam } from '../../services/team';
 
 const Team = () => {
+  const [members, setMembers] = useState<TeamMember[]>(fallbackMembers);
+
+  useEffect(() => {
+    listTeam()
+      .then((data) => {
+        if (data.length > 0) setMembers(data);
+      })
+      .catch(() => {
+        // Keep the static fallback if the backend is unavailable.
+      });
+  }, []);
 
   return (
     <section id="team" className="py-24 bg-mda-cream overflow-hidden">
@@ -25,9 +36,9 @@ const Team = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {teamMembers.map((member, index) => (
+          {members.map((member) => (
             <div 
-              key={index} 
+              key={member.id} 
               className="group relative bg-white border border-mda-maroon/10 p-2 transition-all duration-500 hover:shadow-2xl hover:shadow-mda-maroon/10 hover:-translate-y-2"
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-mda-maroon/5">

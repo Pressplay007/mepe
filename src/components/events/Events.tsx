@@ -1,30 +1,24 @@
-import { useState } from "react";
-
-interface Event {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  image?: string;
-  category: "upcoming" | "past";
-}
+import { useEffect, useState } from "react";
+import { events as fallbackEvents, type Event } from "../../data/events";
+import { listEvents } from "../../services/events";
 
 const Events = () => {
-  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("past");
+  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
+  const [events, setEvents] = useState<Event[]>(fallbackEvents);
 
-  const events: Event[] = [
-    {
-      id: "easter-congress-2026",
-      title: "Mepe Hosts Easter Congress 2026",
-      date: "April 2026",
-      description:
-        "Easter Congress is held every Easter by the Chiefs, Queen Mothers, elders and concern natives of Mepe to dialogue about the community’s future. In this year’s Congress, a lot of issues were addressed and one of the most issues addressed was the election of New Mepe Development Association’s (MDA) Chairman. The old MDA leadership held the position for eight years and in this year’s congress, a new leader was elected to Chair the affairs of the MDA.",
-      category: "past",
-      image: "/past-event1.jpeg", 
-    },
-  ];
+  useEffect(() => {
+    listEvents()
+      .then((data) => {
+        if (data.length > 0) setEvents(data);
+      })
+      .catch(() => {
+        // Keep the static fallback if the backend is unavailable.
+      });
+  }, []);
 
-  const filteredEvents = events.filter((event) => event.category === activeTab);
+  const filteredEvents = events.filter((event) =>
+    activeTab === "past" ? event.status === "Past" : event.status !== "Past",
+  );
 
   return (
     <section className="py-16 md:py-24 bg-mda-cream/50 min-h-screen">
@@ -69,27 +63,18 @@ const Events = () => {
             {filteredEvents.map((event) => (
               <div
                 key={event.id}
-                className="bg-white rounded-[2.5rem] overflow-hidden border border-mda-maroon/5 shadow-xl flex flex-col md:flex-row group hover:shadow-2xl transition-all duration-500"
+                className="bg-white rounded-[2.5rem] overflow-hidden border border-mda-maroon/5 shadow-xl flex flex-col group hover:shadow-2xl transition-all duration-500"
               >
-                <div className="md:w-2/5 aspect-[4/3] md:aspect-auto bg-mda-maroon/5 relative overflow-hidden">
-                  {event.image ? (
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-mda-maroon/10 font-display text-4xl italic">
-                      Event Image
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span className="bg-mda-pink/20 text-mda-maroon px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                       {event.date}
                     </span>
+                    {event.location && (
+                      <span className="bg-mda-maroon/5 text-mda-maroon px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                        {event.location}
+                      </span>
+                    )}
                   </div>
                   <h3 className="text-3xl md:text-5xl font-display text-mda-maroon mb-6 leading-tight">
                     {event.title}
