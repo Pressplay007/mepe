@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import MainRoutes from "./routes/main-routes";
 import ScrollToTop from "./components/common/ScrollToTop";
 import AnnouncementPopup from "./components/announcements/AnnouncementPopup";
+import { ConfirmProvider } from "./components/common/ConfirmDialog";
 
 const AppContent = () => {
   const location = useLocation();
@@ -28,7 +29,9 @@ function App() {
     <HelmetProvider>
       <Router>
         <ScrollToTop />
-        <AppContent />
+        <ConfirmProvider>
+          <AppContent />
+        </ConfirmProvider>
         <Toaster richColors position="top-right" closeButton />
       </Router>
     </HelmetProvider>

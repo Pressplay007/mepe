@@ -21,8 +21,10 @@ import {
 } from "../../services/announcements";
 import AddAnnouncementSheet from "../../components/admin/AddAnnouncementSheet";
 import EditAnnouncementSheet from "../../components/admin/EditAnnouncementSheet";
+import { useConfirm } from "../../components/common/ConfirmDialog";
 
 const AnnouncementsManagement = () => {
+  const confirm = useConfirm();
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -62,8 +64,12 @@ const AnnouncementsManagement = () => {
   };
 
   const handleDeleteAnnouncement = async (id: string) => {
-    if (!window.confirm("Delete this announcement? This cannot be undone."))
-      return;
+    const ok = await confirm({
+      title: "Delete announcement",
+      description: "This will permanently remove the announcement. This cannot be undone.",
+      confirmText: "Delete",
+    });
+    if (!ok) return;
     try {
       await deleteAnnouncement(id);
       setAnnouncements((prev) => prev.filter((a) => a.id !== id));

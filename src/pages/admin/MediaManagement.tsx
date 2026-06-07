@@ -16,8 +16,10 @@ import {
   deleteMedia,
   type MediaItem,
 } from "../../services/media";
+import { useConfirm } from "../../components/common/ConfirmDialog";
 
 const MediaManagement = () => {
+  const confirm = useConfirm();
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -43,7 +45,12 @@ const MediaManagement = () => {
   };
 
   const handleDelete = async (item: MediaItem) => {
-    if (!window.confirm("Delete this file? This cannot be undone.")) return;
+    const ok = await confirm({
+      title: "Delete file",
+      description: "This will permanently delete the file from storage. This cannot be undone.",
+      confirmText: "Delete",
+    });
+    if (!ok) return;
     try {
       await deleteMedia(item);
       setMedia((prev) => prev.filter((m) => m.id !== item.id));

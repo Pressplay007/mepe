@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { type AdminData } from "../../components/admin/AddAdminSheet";
 import EditAdminSheet from "../../components/admin/EditAdminSheet";
 import { listAdmins, updateAdmin, deleteAdmin } from "../../services/admins";
+import { useConfirm } from "../../components/common/ConfirmDialog";
 
 const roleIcon = (role: AdminData["role"]) => {
   switch (role) {
@@ -38,6 +39,7 @@ const roleBadgeStyle = (role: AdminData["role"]) => {
 };
 
 const AdminManagement = () => {
+  const confirm = useConfirm();
   const [admins, setAdmins] = useState<AdminData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -79,12 +81,12 @@ const AdminManagement = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (
-      !window.confirm(
-        "Revoke this administrator's access? This cannot be undone.",
-      )
-    )
-      return;
+    const ok = await confirm({
+      title: "Revoke administrator access",
+      description: "This administrator will lose access to the dashboard. This cannot be undone.",
+      confirmText: "Revoke access",
+    });
+    if (!ok) return;
     try {
       await deleteAdmin(id);
       setAdmins((prev) => prev.filter((a) => a.id !== id));

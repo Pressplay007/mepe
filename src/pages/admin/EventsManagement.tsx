@@ -21,8 +21,10 @@ import {
 } from '../../services/events';
 import AddEventSheet from '../../components/admin/AddEventSheet';
 import EditEventSheet from '../../components/admin/EditEventSheet';
+import { useConfirm } from '../../components/common/ConfirmDialog';
 
 const EventsManagement = () => {
+  const confirm = useConfirm();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -61,7 +63,12 @@ const EventsManagement = () => {
   };
 
   const handleDeleteEvent = async (id: string) => {
-    if (!window.confirm('Delete this event? This cannot be undone.')) return;
+    const ok = await confirm({
+      title: "Delete event",
+      description: "This will remove the event from the calendar. This cannot be undone.",
+      confirmText: "Delete",
+    });
+    if (!ok) return;
     try {
       await deleteEvent(id);
       setEvents((prev) => prev.filter((e) => e.id !== id));

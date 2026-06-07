@@ -19,10 +19,12 @@ import {
 } from "../../services/team";
 import AddMemberSheet from "../../components/admin/AddMemberSheet";
 import EditMemberSheet from "../../components/admin/EditMemberSheet";
+import { useConfirm } from "../../components/common/ConfirmDialog";
 
 const ITEMS_PER_PAGE = 10;
 
 const TeamManagement = () => {
+  const confirm = useConfirm();
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -67,8 +69,12 @@ const TeamManagement = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Delete this team member? This cannot be undone."))
-      return;
+    const ok = await confirm({
+      title: "Delete team member",
+      description: "This will remove the member from the directory. This cannot be undone.",
+      confirmText: "Delete",
+    });
+    if (!ok) return;
     try {
       await deleteTeamMember(id);
       setMembers((prev) => prev.filter((m) => m.id !== id));

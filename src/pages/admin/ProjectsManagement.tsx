@@ -18,8 +18,10 @@ import {
 } from "../../services/projects";
 import AddProjectSheet from "../../components/admin/AddProjectSheet";
 import EditProjectSheet from "../../components/admin/EditProjectSheet";
+import { useConfirm } from "../../components/common/ConfirmDialog";
 
 const ProjectsManagement = () => {
+  const confirm = useConfirm();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -59,7 +61,12 @@ const ProjectsManagement = () => {
   };
 
   const handleDeleteProject = async (id: string) => {
-    if (!window.confirm("Delete this project? This cannot be undone.")) return;
+    const ok = await confirm({
+      title: "Delete project",
+      description: "This will permanently remove the project. This cannot be undone.",
+      confirmText: "Delete",
+    });
+    if (!ok) return;
     try {
       await deleteProject(id);
       setProjects((prev) => prev.filter((p) => p.id !== id));
