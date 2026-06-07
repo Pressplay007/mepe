@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Type } from "lucide-react";
+import { toast } from "sonner";
 import type { Announcement } from "../../data/announcements";
 import {
   Sheet,
@@ -40,13 +41,11 @@ const AddAnnouncementSheet = ({
   const [newAnnouncement, setNewAnnouncement] =
     useState<Partial<Announcement>>(makeEmpty);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!newAnnouncement.title) return;
 
-    setError("");
     setSubmitting(true);
     try {
       await onAdd({
@@ -58,7 +57,7 @@ const AddAnnouncementSheet = ({
       setNewAnnouncement(makeEmpty());
       onClose();
     } catch (err) {
-      setError(
+      toast.error(
         err instanceof Error ? err.message : "Could not publish announcement.",
       );
     } finally {
@@ -185,12 +184,6 @@ const AddAnnouncementSheet = ({
               </button>
             </div>
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

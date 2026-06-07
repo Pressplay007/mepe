@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { User, DollarSign} from "lucide-react";
+import { toast } from "sonner";
 import type { Project } from "../../data/projects";
 import {
   Sheet,
@@ -33,20 +34,18 @@ const emptyProject: Partial<Project> = {
 const AddProjectSheet = ({ isOpen, onClose, onAdd }: AddProjectSheetProps) => {
   const [newProject, setNewProject] = useState<Partial<Project>>(emptyProject);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!newProject.title || !newProject.lead) return;
 
-    setError("");
     setSubmitting(true);
     try {
       await onAdd(newProject as Project);
       setNewProject(emptyProject);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not add project.");
+      toast.error(err instanceof Error ? err.message : "Could not add project.");
     } finally {
       setSubmitting(false);
     }
@@ -204,12 +203,6 @@ const AddProjectSheet = ({ isOpen, onClose, onAdd }: AddProjectSheetProps) => {
               />
             </div>
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

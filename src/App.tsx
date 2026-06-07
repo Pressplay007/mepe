@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { Toaster } from "sonner";
 import Navbar from "./components/nav/Navbar";
 import Footer from "./components/footer";
 import MainRoutes from "./routes/main-routes";
@@ -28,6 +29,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <AppContent />
+        <Toaster richColors position="top-right" closeButton />
       </Router>
     </HelmetProvider>
   );

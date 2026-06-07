@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { Save } from "lucide-react";
+import { toast } from "sonner";
 import {
   Sheet,
   SheetContent,
@@ -36,7 +37,6 @@ const EditAdminSheet = ({
   const [role, setRole] = useState<AdminData["role"]>("Moderator");
   const [status, setStatus] = useState<AdminData["status"]>("Active");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (admin) {
@@ -44,7 +44,6 @@ const EditAdminSheet = ({
       setEmail(admin.email);
       setRole(admin.role);
       setStatus(admin.status);
-      setError("");
     }
   }, [admin]);
 
@@ -52,13 +51,12 @@ const EditAdminSheet = ({
     e?.preventDefault();
     if (!name || !admin) return;
 
-    setError("");
     setSubmitting(true);
     try {
       await onSave({ ...admin, name, email, role, status });
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not save changes.");
+      toast.error(err instanceof Error ? err.message : "Could not save changes.");
     } finally {
       setSubmitting(false);
     }
@@ -157,12 +155,6 @@ const EditAdminSheet = ({
               an account instead.
             </p>
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

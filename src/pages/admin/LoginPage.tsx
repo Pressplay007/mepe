@@ -1,28 +1,28 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Lock, Mail, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
 import { login } from "../../services/auth";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
     setIsLoading(true);
 
     try {
       await login(email, password);
-      navigate("/admin/dashboard");
+      toast.success("Welcome back.");
+      // Let the toast render before navigating away from the login screen.
+      setTimeout(() => navigate("/admin/dashboard"), 700);
     } catch (err) {
-      setError(
+      toast.error(
         err instanceof Error ? err.message : "Invalid email or password.",
       );
-    } finally {
       setIsLoading(false);
     }
   };
@@ -85,12 +85,6 @@ const LoginPage = () => {
                 />
               </div>
             </div>
-
-            {error && (
-              <div className="bg-red-50 border border-red-200 rounded-2xl px-4 py-3">
-                <p className="text-xs font-medium text-red-600">{error}</p>
-              </div>
-            )}
 
             <button
               type="submit"

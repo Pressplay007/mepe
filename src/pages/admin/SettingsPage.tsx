@@ -5,8 +5,8 @@ import {
   Lock,
   Eye,
   EyeOff,
-  CheckCircle,
 } from "lucide-react";
+import { toast } from "sonner";
 import {
   getCurrentAdmin,
   updateProfile,
@@ -28,12 +28,8 @@ const SettingsPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Feedback state
-  const [profileSaved, setProfileSaved] = useState(false);
-  const [passwordSaved, setPasswordSaved] = useState(false);
   const [profileSaving, setProfileSaving] = useState(false);
   const [passwordSaving, setPasswordSaving] = useState(false);
-  const [profileError, setProfileError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     getCurrentAdmin().then((admin) => {
@@ -46,14 +42,12 @@ const SettingsPage = () => {
   }, []);
 
   const handleProfileSave = async () => {
-    setProfileError("");
     setProfileSaving(true);
     try {
       await updateProfile(name);
-      setProfileSaved(true);
-      setTimeout(() => setProfileSaved(false), 3000);
+      toast.success("Profile updated.");
     } catch (err) {
-      setProfileError(
+      toast.error(
         err instanceof Error ? err.message : "Could not update profile.",
       );
     } finally {
@@ -62,20 +56,18 @@ const SettingsPage = () => {
   };
 
   const handlePasswordSave = async () => {
-    setPasswordError("");
     if (!currentPassword || !newPassword) return;
     if (newPassword !== confirmPassword) return;
 
     setPasswordSaving(true);
     try {
       await changePassword(currentPassword, newPassword);
-      setPasswordSaved(true);
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-      setTimeout(() => setPasswordSaved(false), 3000);
+      toast.success("Password updated.");
     } catch (err) {
-      setPasswordError(
+      toast.error(
         err instanceof Error ? err.message : "Could not update password.",
       );
     } finally {
@@ -117,14 +109,6 @@ const SettingsPage = () => {
               Profile Information
             </h2>
           </div>
-          {profileSaved && (
-            <div className="flex items-center gap-2 text-emerald-500 animate-fade-in">
-              <CheckCircle size={14} />
-              <span className="text-[10px] font-bold uppercase tracking-widest">
-                Saved successfully
-              </span>
-            </div>
-          )}
         </div>
 
         <div className="p-8 space-y-6">
@@ -182,11 +166,6 @@ const SettingsPage = () => {
         </div>
 
         <div className="p-8 border-t border-mda-maroon/5 flex items-center justify-end gap-4">
-          {profileError && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest">
-              {profileError}
-            </p>
-          )}
           <button
             onClick={handleProfileSave}
             disabled={profileSaving}
@@ -206,14 +185,6 @@ const SettingsPage = () => {
               Change Password
             </h2>
           </div>
-          {passwordSaved && (
-            <div className="flex items-center gap-2 text-emerald-500 animate-fade-in">
-              <CheckCircle size={14} />
-              <span className="text-mda-maroon/60 mt-1 font-medium tracking-wide">
-                Password updated
-              </span>
-            </div>
-          )}
         </div>
 
         <div className="p-8 space-y-6">
@@ -315,11 +286,6 @@ const SettingsPage = () => {
         </div>
 
         <div className="p-8 border-t border-mda-maroon/5 flex items-center justify-end gap-4">
-          {passwordError && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest">
-              {passwordError}
-            </p>
-          )}
           <button
             onClick={handlePasswordSave}
             disabled={

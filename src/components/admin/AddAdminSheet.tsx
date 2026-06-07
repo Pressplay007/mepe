@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { toast } from "sonner";
 import {
   Sheet,
   SheetContent,
@@ -43,7 +44,6 @@ const AddAdminSheet = ({ isOpen, onClose, onAdd }: AddAdminSheetProps) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState<AdminData["role"]>("Moderator");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   const resetForm = () => {
     setName("");
@@ -58,14 +58,13 @@ const AddAdminSheet = ({ isOpen, onClose, onAdd }: AddAdminSheetProps) => {
     if (!name || !email || !password) return;
     if (password !== confirmPassword) return;
 
-    setError("");
     setSubmitting(true);
     try {
       await onAdd({ name, email, password, role });
       resetForm();
       onClose();
     } catch (err) {
-      setError(
+      toast.error(
         err instanceof Error ? err.message : "Could not create administrator.",
       );
     } finally {
@@ -168,12 +167,6 @@ const AddAdminSheet = ({ isOpen, onClose, onAdd }: AddAdminSheetProps) => {
               </p>
             )}
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

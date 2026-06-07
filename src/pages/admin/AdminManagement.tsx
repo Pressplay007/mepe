@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   ShieldAlert,
 } from "lucide-react";
+import { toast } from "sonner";
 import { type AdminData } from "../../components/admin/AddAdminSheet";
 import EditAdminSheet from "../../components/admin/EditAdminSheet";
 import { listAdmins, updateAdmin, deleteAdmin } from "../../services/admins";
@@ -74,6 +75,7 @@ const AdminManagement = () => {
       status: updated.status,
     });
     setAdmins((prev) => prev.map((a) => (a.id === saved.id ? saved : a)));
+    toast.success(`${saved.name} updated.`);
   };
 
   const handleDelete = async (id: string) => {
@@ -83,8 +85,13 @@ const AdminManagement = () => {
       )
     )
       return;
-    await deleteAdmin(id);
-    setAdmins((prev) => prev.filter((a) => a.id !== id));
+    try {
+      await deleteAdmin(id);
+      setAdmins((prev) => prev.filter((a) => a.id !== id));
+      toast.success("Administrator access revoked.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not delete.");
+    }
   };
 
   return (

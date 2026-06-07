@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { Upload } from "lucide-react";
+import { toast } from "sonner";
 import type { TeamMember } from "../../data/team";
 import { uploadTeamPhoto } from "../../services/team";
 import {
@@ -28,13 +29,11 @@ const EditMemberSheet = ({
   const [editedMember, setEditedMember] = useState<Partial<TeamMember>>({});
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (member) {
       setEditedMember({ ...member });
       setPhotoFile(null);
-      setError("");
     }
   }, [member]);
 
@@ -42,7 +41,6 @@ const EditMemberSheet = ({
     e.preventDefault();
     if (!editedMember.name || !editedMember.role || !member) return;
 
-    setError("");
     setSubmitting(true);
     try {
       let image = editedMember.image;
@@ -50,7 +48,7 @@ const EditMemberSheet = ({
       await onSave({ ...member, ...editedMember, image } as TeamMember);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not save changes.");
+      toast.error(err instanceof Error ? err.message : "Could not save changes.");
     } finally {
       setSubmitting(false);
     }
@@ -162,12 +160,6 @@ const EditMemberSheet = ({
               </p>
             </div>
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { Calendar, MapPin, Type } from "lucide-react";
+import { toast } from "sonner";
 import type { Event } from "../../data/events";
 import {
   Sheet, SheetContent, SheetHeader, SheetTitle,
@@ -18,12 +19,10 @@ interface EditEventSheetProps {
 const EditEventSheet = ({ isOpen, onClose, onSave, event }: EditEventSheetProps) => {
   const [edited, setEdited] = useState<Partial<Event>>({});
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (event) {
       setEdited({ ...event });
-      setError("");
     }
   }, [event]);
 
@@ -31,13 +30,12 @@ const EditEventSheet = ({ isOpen, onClose, onSave, event }: EditEventSheetProps)
     e.preventDefault();
     if (!edited.title || !edited.date || !event) return;
 
-    setError("");
     setSubmitting(true);
     try {
       await onSave({ ...event, ...edited } as Event);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not save changes.");
+      toast.error(err instanceof Error ? err.message : "Could not save changes.");
     } finally {
       setSubmitting(false);
     }
@@ -95,12 +93,6 @@ const EditEventSheet = ({ isOpen, onClose, onSave, event }: EditEventSheetProps)
               className="w-full bg-mda-cream/30 border border-mda-maroon/5 rounded-[10px] py-5 px-6 text-sm text-mda-maroon focus:outline-none focus:border-mda-pink transition-all min-h-[120px] resize-none"
               placeholder="Briefly describe the event..." />
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

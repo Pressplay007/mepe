@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Filter
 } from 'lucide-react';
+import { toast } from 'sonner';
 import { type Event } from '../../data/events';
 import {
   listEvents,
@@ -45,6 +46,7 @@ const EventsManagement = () => {
   const handleAddEvent = async (event: Event) => {
     const created = await createEvent(event);
     setEvents((prev) => [created, ...prev]);
+    toast.success(`"${created.title}" scheduled.`);
   };
 
   const handleEditEvent = (event: Event) => {
@@ -55,12 +57,18 @@ const EventsManagement = () => {
   const handleSaveEvent = async (updated: Event) => {
     const saved = await updateEvent(updated.id, updated);
     setEvents((prev) => prev.map((e) => (e.id === saved.id ? saved : e)));
+    toast.success(`"${saved.title}" updated.`);
   };
 
   const handleDeleteEvent = async (id: string) => {
     if (!window.confirm('Delete this event? This cannot be undone.')) return;
-    await deleteEvent(id);
-    setEvents((prev) => prev.filter((e) => e.id !== id));
+    try {
+      await deleteEvent(id);
+      setEvents((prev) => prev.filter((e) => e.id !== id));
+      toast.success('Event deleted.');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Could not delete.');
+    }
   };
 
   const getStatusColor = (status: string) => {

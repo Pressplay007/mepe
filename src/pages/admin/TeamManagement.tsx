@@ -9,6 +9,7 @@ import {
   ChevronRight,
   UserPlus,
 } from "lucide-react";
+import { toast } from "sonner";
 import { type TeamMember } from "../../data/team";
 import {
   listTeam,
@@ -51,6 +52,7 @@ const TeamManagement = () => {
   const handleAddMember = async (member: TeamMember) => {
     const created = await createTeamMember(member);
     setMembers((prev) => [...prev, created]);
+    toast.success(`${created.name} added to the team.`);
   };
 
   const handleEditMember = (member: TeamMember) => {
@@ -61,13 +63,19 @@ const TeamManagement = () => {
   const handleSaveMember = async (updated: TeamMember) => {
     const saved = await updateTeamMember(updated.id, updated);
     setMembers((prev) => prev.map((m) => (m.id === saved.id ? saved : m)));
+    toast.success(`${saved.name} updated.`);
   };
 
   const handleDelete = async (id: string) => {
     if (!window.confirm("Delete this team member? This cannot be undone."))
       return;
-    await deleteTeamMember(id);
-    setMembers((prev) => prev.filter((m) => m.id !== id));
+    try {
+      await deleteTeamMember(id);
+      setMembers((prev) => prev.filter((m) => m.id !== id));
+      toast.success("Team member deleted.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not delete.");
+    }
   };
 
   return (

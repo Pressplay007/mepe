@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Upload, File, Image as ImageIcon } from "lucide-react";
+import { toast } from "sonner";
 import {
   Sheet,
   SheetContent,
@@ -23,20 +24,18 @@ const MediaUploadSheet = ({
 }: MediaUploadSheetProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!selectedFile) return;
 
-    setError("");
     setIsUploading(true);
     try {
       await onUpload(selectedFile);
       setSelectedFile(null);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed.");
+      toast.error(err instanceof Error ? err.message : "Upload failed.");
     } finally {
       setIsUploading(false);
     }
@@ -117,12 +116,6 @@ const MediaUploadSheet = ({
               )}
             </div>
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

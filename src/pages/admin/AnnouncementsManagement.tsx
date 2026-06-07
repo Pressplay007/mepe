@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { toast } from "sonner";
 import { type Announcement } from "../../data/announcements";
 import {
   listAnnouncements,
@@ -46,6 +47,7 @@ const AnnouncementsManagement = () => {
   const handleAddAnnouncement = async (announcement: Announcement) => {
     const created = await createAnnouncement(announcement);
     setAnnouncements((prev) => [created, ...prev]);
+    toast.success("Announcement published.");
   };
 
   const handleEditAnnouncement = (announcement: Announcement) => {
@@ -56,13 +58,19 @@ const AnnouncementsManagement = () => {
   const handleSaveAnnouncement = async (updated: Announcement) => {
     const saved = await updateAnnouncement(updated.id, updated);
     setAnnouncements((prev) => prev.map((a) => (a.id === saved.id ? saved : a)));
+    toast.success("Announcement updated.");
   };
 
   const handleDeleteAnnouncement = async (id: string) => {
     if (!window.confirm("Delete this announcement? This cannot be undone."))
       return;
-    await deleteAnnouncement(id);
-    setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+    try {
+      await deleteAnnouncement(id);
+      setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+      toast.success("Announcement deleted.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not delete.");
+    }
   };
 
   return (

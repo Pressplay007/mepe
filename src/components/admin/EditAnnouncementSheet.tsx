@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { Type } from "lucide-react";
+import { toast } from "sonner";
 import type { Announcement } from "../../data/announcements";
 import {
   Sheet,
@@ -27,12 +28,10 @@ const EditAnnouncementSheet = ({
 }: EditAnnouncementSheetProps) => {
   const [edited, setEdited] = useState<Partial<Announcement>>({});
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (announcement) {
       setEdited({ ...announcement });
-      setError("");
     }
   }, [announcement]);
 
@@ -40,7 +39,6 @@ const EditAnnouncementSheet = ({
     e.preventDefault();
     if (!edited.title || !announcement) return;
 
-    setError("");
     setSubmitting(true);
     try {
       await onSave({
@@ -50,7 +48,7 @@ const EditAnnouncementSheet = ({
       } as Announcement);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not save changes.");
+      toast.error(err instanceof Error ? err.message : "Could not save changes.");
     } finally {
       setSubmitting(false);
     }
@@ -154,12 +152,6 @@ const EditAnnouncementSheet = ({
               </button>
             </div>
           </div>
-
-          {error && (
-            <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest ml-1">
-              {error}
-            </p>
-          )}
         </form>
 
         <SheetFooter className="p-10 border-t border-mda-maroon/5 bg-white flex flex-row gap-4 sm:space-x-0">

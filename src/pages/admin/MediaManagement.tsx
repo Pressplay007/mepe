@@ -8,6 +8,7 @@ import {
   Grid,
   List,
 } from "lucide-react";
+import { toast } from "sonner";
 import MediaUploadSheet from "../../components/admin/MediaUploadSheet";
 import {
   listMedia,
@@ -38,12 +39,18 @@ const MediaManagement = () => {
   const handleUpload = async (file: File) => {
     const created = await uploadMedia(file);
     setMedia((prev) => [created, ...prev]);
+    toast.success(`${created.name} uploaded.`);
   };
 
   const handleDelete = async (item: MediaItem) => {
     if (!window.confirm("Delete this file? This cannot be undone.")) return;
-    await deleteMedia(item);
-    setMedia((prev) => prev.filter((m) => m.id !== item.id));
+    try {
+      await deleteMedia(item);
+      setMedia((prev) => prev.filter((m) => m.id !== item.id));
+      toast.success("File deleted.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not delete.");
+    }
   };
 
   return (

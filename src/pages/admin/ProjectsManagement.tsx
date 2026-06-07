@@ -8,6 +8,7 @@ import {
   DollarSign,
   Filter,
 } from "lucide-react";
+import { toast } from "sonner";
 import { type Project } from "../../data/projects";
 import {
   listProjects,
@@ -43,6 +44,7 @@ const ProjectsManagement = () => {
   const handleAddProject = async (project: Project) => {
     const created = await createProject(project);
     setProjects((prev) => [created, ...prev]);
+    toast.success(`"${created.title}" added.`);
   };
 
   const handleEditProject = (project: Project) => {
@@ -53,12 +55,18 @@ const ProjectsManagement = () => {
   const handleSaveProject = async (updated: Project) => {
     const saved = await updateProject(updated.id, updated);
     setProjects((prev) => prev.map((p) => (p.id === saved.id ? saved : p)));
+    toast.success(`"${saved.title}" updated.`);
   };
 
   const handleDeleteProject = async (id: string) => {
     if (!window.confirm("Delete this project? This cannot be undone.")) return;
-    await deleteProject(id);
-    setProjects((prev) => prev.filter((p) => p.id !== id));
+    try {
+      await deleteProject(id);
+      setProjects((prev) => prev.filter((p) => p.id !== id));
+      toast.success("Project deleted.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not delete.");
+    }
   };
 
   const getStatusStyle = (status: string) => {
