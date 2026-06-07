@@ -1,26 +1,22 @@
-interface NewsItem {
-  id: string;
-  title: string;
-  date: string;
-  content: string[];
-}
+import { useEffect, useState } from "react";
+import type { Announcement } from "../../data/announcements";
+import { listAnnouncements } from "../../services/announcements";
 
 const News = () => {
-  const newsItems: NewsItem[] = [
-    {
-      id: "mda-chairman-election-2026",
-      title: "Mr Bismarck Fiifi Tetteh elected as Mepe Development Association’s (MDA) Chairman",
-      date: "April 2026",
-      content: [
-        "At the 2026 Easter Congress, the need came for a new Chairman to be elected after the old leaderships time in office elapsed.",
-        "Mamaga Adzo Sreku IV suggested Mr. Bismarck Fiifi Tetteh and she was backed by Torgbe Kwasi Adzima’s advisor, Mr Raymond Amesi Zafor.",
-        "Mr. Amadzi also suggested Mr. Prosper Sevor and he was backed by Mr. Gabriel Kwakutse Amegla.",
-        "Mr. Prosper Sevor declared his unwillingness to contest in the election but rather threw his support to Mr. Bismarck Fiifi Tetteh.",
-        "Mr. Bismarck Fiifi Tetteh then went unopposed and won by more than 3/4 of the entire population present.",
-        "He was declared the new Chairman elect by Mepe Traditional Council’s secretary, Mr. James Krakani.",
-      ],
-    },
-  ];
+  const [items, setItems] = useState<Announcement[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    listAnnouncements()
+      .then((data) => {
+        const published = data.filter(
+          (a) => !a.status || a.status === "Published",
+        );
+        setItems(published);
+      })
+      .catch(() => setItems([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <section className="py-16 md:py-24 bg-white min-h-[60vh]">
@@ -41,9 +37,13 @@ const News = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {newsItems.length > 0 ? (
+        {loading ? (
+          <div className="flex justify-center py-16">
+            <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
+          </div>
+        ) : items.length > 0 ? (
           <div className="grid grid-cols-1 gap-12">
-            {newsItems.map((item) => (
+            {items.map((item) => (
               <div
                 key={item.id}
                 className="bg-mda-cream/30 rounded-[2.5rem] p-8 md:p-16 border border-mda-maroon/5 shadow-sm hover:shadow-xl transition-all duration-500"
@@ -55,20 +55,15 @@ const News = () => {
                     </span>
                     <div className="h-px w-12 bg-mda-maroon/20" />
                   </div>
-                  
+
                   <h3 className="text-3xl md:text-5xl lg:text-6xl font-display text-mda-maroon mb-8 leading-tight">
                     {item.title}
                   </h3>
 
                   <div className="space-y-6">
-                    {item.content.map((paragraph, index) => (
-                      <p
-                        key={index}
-                        className="font-body text-mda-dark/80 text-lg md:text-xl leading-relaxed"
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
+                    <p className="font-body text-mda-dark/80 text-lg md:text-xl leading-relaxed">
+                      {item.summary}
+                    </p>
                   </div>
 
                   <div className="mt-12 flex items-center gap-4">
@@ -84,7 +79,7 @@ const News = () => {
         ) : (
           <div className="bg-mda-cream/30 rounded-[2rem] md:rounded-[3rem] p-12 md:p-24 text-center border border-mda-maroon/5 shadow-sm">
             <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase mb-4 italic">
-              No news highlights at this time
+              No news available
             </h3>
             <p className="font-body text-mda-dark/40 tracking-widest uppercase text-[10px] md:text-xs font-bold">
               Please check back later for the latest updates from the Mepe
@@ -98,4 +93,3 @@ const News = () => {
 };
 
 export default News;
-

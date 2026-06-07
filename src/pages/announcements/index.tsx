@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 import SEO from "../../components/common/SEO";
-import {
-  announcements as fallbackAnnouncements,
-  type Announcement,
-} from "../../data/announcements";
+import { type Announcement } from "../../data/announcements";
 import { listAnnouncements } from "../../services/announcements";
 import { X, FileText, Calendar, Tag } from "lucide-react";
 
 const AnnouncementsPage = () => {
   const [selectedAnnouncement, setSelectedAnnouncement] =
     useState<Announcement | null>(null);
-  const [announcements, setAnnouncements] = useState<Announcement[]>(
-    fallbackAnnouncements,
-  );
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     listAnnouncements()
@@ -20,11 +16,10 @@ const AnnouncementsPage = () => {
         const published = data.filter(
           (a) => !a.status || a.status === "Published",
         );
-        if (published.length > 0) setAnnouncements(published);
+        setAnnouncements(published);
       })
-      .catch(() => {
-        // Keep the static fallback if the backend is unavailable.
-      });
+      .catch(() => setAnnouncements([]))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -45,6 +40,11 @@ const AnnouncementsPage = () => {
           ></div>
         </header>
 
+        {loading ? (
+          <div className="flex justify-center py-16">
+            <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
+          </div>
+        ) : announcements.length > 0 ? (
         <div className="grid gap-8">
           {announcements.map((item, index) => (
             <div
@@ -83,6 +83,16 @@ const AnnouncementsPage = () => {
             </div>
           ))}
         </div>
+        ) : (
+          <div className="bg-white border border-mda-maroon/10 rounded-[2rem] p-12 md:p-24 text-center">
+            <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase mb-4 italic">
+              No announcements available
+            </h3>
+            <p className="font-body text-mda-maroon/40 tracking-widest uppercase text-[10px] md:text-xs font-bold">
+              Official updates will appear here once they are published.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Announcement Modal */}

@@ -25,248 +25,9 @@ interface GalleryVideo {
 const Gallery = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
-
-  const fallbackImages: GalleryImage[] = [
-    {
-      src: new URL(
-        "../../assets/gallery/456251856_18061206280720953_4691208955845474968_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Mepe Tradition",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/455800117_18061206196720953_4456184814691688723_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Festival Spirit",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/Kente-Cloth-Ghanas-Cultural-Gold-Mine_010925-1-scaled.jpg",
-        import.meta.url,
-      ).href,
-      title: "Cultural Artistry",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/images_Banku_And_Okro_Soup_277506581.jpg",
-        import.meta.url,
-      ).href,
-      title: "Local Tastes",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/Makola-Market-Accra.jpg",
-        import.meta.url,
-      ).href,
-      title: "Market Life",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "River Volta",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/456130250_18061206187720953_8453159004960842026_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Rhythm of Mepe",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/456328911_18061206232720953_4587617597907394016_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Mepe Landscape",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/456132438_18061206193720953_3368855995947669246_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Development Site",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Future Leaders",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Skills Training",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/455721395_18061206301720953_6554931698407349356_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Community Unity",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/456217266_18061206190720953_9190619641682968041_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Heritage",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/456314736_18061206244720953_3574851341763144433_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Project Progress",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/505730882_1301467045319971_4163705806737903282_n.jpg",
-        import.meta.url,
-      ).href,
-      title: "Youth Mentorship",
-    },
-    {
-      src: new URL("../../assets/gallery/51030396.jpg", import.meta.url).href,
-      title: "Community Life",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (1).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Community Moment",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (2).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Local Interaction",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (3).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Project Site",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (4).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Village Scene",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (5).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Traditional Event",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (6).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Market Scene",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (7).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Nature & Life",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (8).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Landscape View",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (9).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Community Members",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (10).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Education Project",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (11).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Skills Hub",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (12).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Future Prospects",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (13).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Local Heritage",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (14).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Tradition Alive",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (15).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Community Growth",
-    },
-    {
-      src: new URL(
-        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (16).jpeg",
-        import.meta.url,
-      ).href,
-      title: "Mepe Forward",
-    },
-  ];
-
-  const fallbackVideos: GalleryVideo[] = [
-    {
-      // title: "The Heart of Mepe",
-      category: "Documentary",
-      url: new URL("../../assets/gallery/vid1.mp4", import.meta.url).href,
-      isLocal: true,
-    },
-    {
-      // title: "Afenorto Festival 2025",
-      category: "Documentary",
-      url: new URL("../../assets/gallery/vid2.mp4", import.meta.url).href,
-      isLocal: true,
-    },
-  ];
-
-  const [images, setImages] = useState<GalleryImage[]>(fallbackImages);
-  const [videos, setVideos] = useState<GalleryVideo[]>(fallbackVideos);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [videos, setVideos] = useState<GalleryVideo[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     listMedia()
@@ -286,12 +47,14 @@ const Gallery = () => {
             url: m.url,
             isLocal: true,
           }));
-        if (imgs.length > 0) setImages(imgs);
-        if (vids.length > 0) setVideos(vids);
+        setImages(imgs);
+        setVideos(vids);
       })
       .catch(() => {
-        // Keep the static fallback if the backend is unavailable.
-      });
+        setImages([]);
+        setVideos([]);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const nextImage = () => {
@@ -364,7 +127,13 @@ const Gallery = () => {
             }}
           />
 
-          <div className="max-w-7xl mx-auto columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-12 space-y-6 md:space-y-12 relative z-10">
+          <div className="max-w-7xl mx-auto relative z-10">
+            {loading ? (
+              <div className="flex justify-center py-16">
+                <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
+              </div>
+            ) : images.length > 0 ? (
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-12 space-y-6 md:space-y-12">
             {images.map((image, i) => (
               <div
                 key={i}
@@ -389,9 +158,21 @@ const Gallery = () => {
               </div>
             ))}
           </div>
+            ) : (
+              <div className="bg-mda-cream/50 border border-mda-maroon/10 rounded-[2rem] p-12 md:p-24 text-center">
+                <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase mb-4 italic">
+                  No gallery images yet
+                </h3>
+                <p className="font-body text-mda-maroon/40 tracking-widest uppercase text-[10px] md:text-xs font-bold">
+                  Photos will appear here once they are uploaded through the admin panel.
+                </p>
+              </div>
+            )}
+          </div>
         </section>
 
         {/* Video Archive Section */}
+        {videos.length > 0 && (
         <section className="py-24 md:py-40 px-4 md:px-8 bg-mda-maroon text-white relative overflow-hidden">
           {/* Kinetic Mesh Background */}
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -460,6 +241,7 @@ const Gallery = () => {
             </div>
           </div>
         </section>
+        )}
 
         {/* Lightbox Modal */}
         {selectedIndex !== null && (

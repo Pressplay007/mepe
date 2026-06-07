@@ -8,26 +8,27 @@ const AnnouncementPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [latest, setLatest] = useState<Announcement | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 2000);
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
     listAnnouncements()
       .then((data) => {
         const published = data.find(
           (a) => !a.status || a.status === "Published",
         );
-        if (published) setLatest(published);
+        if (published) {
+          setLatest(published);
+          timer = setTimeout(() => setIsVisible(true), 2000);
+        }
       })
-      .catch(() => {
-        // Keep the static fallback copy if the backend is unavailable.
-      });
+      .catch(() => setLatest(null))
+      .finally(() => setLoaded(true));
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   const handleDismiss = () => {
@@ -35,7 +36,7 @@ const AnnouncementPopup = () => {
     setTimeout(() => setIsDismissed(true), 500);
   };
 
-  if (isDismissed) return null;
+  if (!loaded || !latest || isDismissed) return null;
 
   return (
     <div 
@@ -44,7 +45,6 @@ const AnnouncementPopup = () => {
       }`}
     >
       <div className="bg-white shadow-2xl overflow-hidden flex flex-col md:flex-row border border-mda-maroon/5 relative rounded-sm">
-        {/* Close Button */}
         <button 
           onClick={handleDismiss}
           className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-md md:bg-transparent rounded-full text-mda-maroon/60 hover:text-mda-maroon z-20 transition-colors shadow-sm md:shadow-none"
@@ -52,9 +52,7 @@ const AnnouncementPopup = () => {
           <X size={18} />
         </button>
 
-        {/* Left Side - Graphic/Header */}
         <div className="w-full h-32 md:h-auto md:w-2/5 bg-mda-maroon p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
-          {/* Abstract Pattern Overlay */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute top-0 left-0 w-full h-full border-4 border-white m-2"></div>
             <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-white rounded-full"></div>
@@ -66,23 +64,20 @@ const AnnouncementPopup = () => {
              </div>
              <p className="text-[8px] md:text-[10px] font-bold text-mda-pink uppercase tracking-[0.3em] mb-1 md:mb-2">Notice</p>
              <h3 className="text-xl md:text-2xl font-display text-white leading-tight uppercase">
-               {latest ? latest.category : (<>EXECUTIVE <br className="hidden md:block" /> MEMBERSHIP</>)}
+               {latest.category}
              </h3>
           </div>
         </div>
 
-        {/* Right Side - Content */}
         <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
           <div className="inline-block px-2 py-0.5 bg-mda-maroon/5 text-mda-maroon text-[8px] font-bold uppercase tracking-widest mb-3">
-            {latest ? latest.date : "CONFIRMED"}
+            {latest.date}
           </div>
           <h4 className="text-lg md:text-xl font-display text-mda-maroon mb-2 leading-tight uppercase line-clamp-2">
-            {latest ? latest.title : "New Leadership Committee"}
+            {latest.title}
           </h4>
           <p className="text-[10px] md:text-xs font-body text-mda-maroon/60 mb-5 leading-relaxed line-clamp-3">
-            {latest
-              ? latest.summary
-              : "The Mepe Development Association has formally constituted its Executive Committee for 2026."}
+            {latest.summary}
           </p>
 
           <Link 

@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { events as fallbackEvents, type Event } from "../../data/events";
+import type { Event } from "../../data/events";
 import { listEvents } from "../../services/events";
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
-  const [events, setEvents] = useState<Event[]>(fallbackEvents);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     listEvents()
-      .then((data) => {
-        if (data.length > 0) setEvents(data);
-      })
-      .catch(() => {
-        // Keep the static fallback if the backend is unavailable.
-      });
+      .then(setEvents)
+      .catch(() => setEvents([]))
+      .finally(() => setLoading(false));
   }, []);
 
   const filteredEvents = events.filter((event) =>
@@ -33,7 +31,6 @@ const Events = () => {
             MEPE EVENTS
           </h2>
 
-          {/* Tabs */}
           <div className="flex justify-center gap-4 md:gap-8 mb-12">
             <button
               onClick={() => setActiveTab("upcoming")}
@@ -58,7 +55,11 @@ const Events = () => {
           </div>
         </div>
 
-        {filteredEvents.length > 0 ? (
+        {loading ? (
+          <div className="flex justify-center py-16">
+            <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
+          </div>
+        ) : filteredEvents.length > 0 ? (
           <div className="grid grid-cols-1 gap-12">
             {filteredEvents.map((event) => (
               <div
@@ -90,7 +91,9 @@ const Events = () => {
         ) : (
           <div className="bg-white rounded-[2rem] md:rounded-[3rem] p-12 md:p-24 text-center border border-mda-maroon/5 shadow-2xl">
             <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase mb-4 italic">
-              There are no {activeTab} events scheduled
+              {events.length === 0
+                ? "No events available"
+                : `There are no ${activeTab} events scheduled`}
             </h3>
             <p className="font-body text-mda-dark/40 tracking-widest uppercase text-[10px] md:text-xs font-bold">
               Please check back later for updates on community durbars and
@@ -104,4 +107,3 @@ const Events = () => {
 };
 
 export default Events;
-
