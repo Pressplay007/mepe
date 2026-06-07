@@ -1,16 +1,8 @@
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Handshake,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Send, Handshake, Facebook, Youtube } from "lucide-react";
 
 import SEO from "../../components/common/SEO";
+import { TikTokIcon } from "../../components/common/icons";
+import { SITE_EMAIL, SITE_PHONES, SOCIAL_LINKS } from "../../lib/site";
 
 const ContactPage = () => {
   return (
@@ -177,11 +169,16 @@ const ContactPage = () => {
                       <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">
                         EMAIL
                       </h5>
-                      <p className="font-bold text-sm">info@mdagh.org</p>
+                      <a
+                        href={`mailto:${SITE_EMAIL}`}
+                        className="font-bold text-sm hover:text-mda-pink transition-colors break-all"
+                      >
+                        {SITE_EMAIL}
+                      </a>
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-center group">
+                  <div className="flex gap-4 items-start group">
                     <div className="w-10 h-10 bg-mda-cream rounded-lg flex items-center justify-center shrink-0 group-hover:bg-mda-maroon transition-colors">
                       <Phone className="w-4 h-4 text-mda-pink" />
                     </div>
@@ -189,16 +186,33 @@ const ContactPage = () => {
                       <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">
                         PHONE
                       </h5>
-                      <p className="font-bold text-sm">+233 24 457 9498</p>
+                      <div className="flex flex-col gap-0.5">
+                        {SITE_PHONES.map((phone) => (
+                          <a
+                            key={phone.href}
+                            href={phone.href}
+                            className="font-bold text-sm hover:text-mda-pink transition-colors"
+                          >
+                            {phone.display}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3 pt-6 border-t border-mda-maroon/5">
-                  {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                  {[
+                    { Icon: Youtube, link: SOCIAL_LINKS.youtube, label: "YouTube" },
+                    { Icon: Facebook, link: SOCIAL_LINKS.facebook, label: "Facebook" },
+                    { Icon: TikTokIcon, link: SOCIAL_LINKS.tiktok, label: "TikTok" },
+                  ].map(({ Icon, link, label }, i) => (
                     <a
                       key={i}
-                      href="#"
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
                       className="w-9 h-9 rounded-lg bg-mda-cream flex items-center justify-center hover:bg-mda-pink hover:text-mda-maroon transition-all group"
                     >
                       <Icon className="w-4 h-4 transition-transform group-hover:scale-110" />

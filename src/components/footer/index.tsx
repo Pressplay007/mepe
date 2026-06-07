@@ -1,14 +1,7 @@
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  MapPin,
-  Mail,
-  Phone,
-  Send,
-} from "lucide-react";
+import { Facebook, Youtube, MapPin, Mail, Phone, Send } from "lucide-react";
 import { Link } from "react-router-dom";
+import { TikTokIcon } from "../common/icons";
+import { SITE_EMAIL, SITE_PHONES, SOCIAL_LINKS } from "../../lib/site";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -37,14 +30,16 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-4">
             {[
-              { Icon: Facebook, link: "#" },
-              { Icon: Twitter, link: "#" },
-              { Icon: Instagram, link: "#" },
-              { Icon: Linkedin, link: "#" },
-            ].map(({ Icon, link }, index) => (
+              { Icon: Youtube, link: SOCIAL_LINKS.youtube, label: "YouTube" },
+              { Icon: Facebook, link: SOCIAL_LINKS.facebook, label: "Facebook" },
+              { Icon: TikTokIcon, link: SOCIAL_LINKS.tiktok, label: "TikTok" },
+            ].map(({ Icon, link, label }, index) => (
               <a
                 key={index}
                 href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-mda-pink hover:text-mda-maroon transition-all group animate-float"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
@@ -105,17 +100,27 @@ const Footer = () => {
                 <Mail size={16} className="text-mda-pink" />
               </div>
               <a
-                href="mailto:info@mdagh.org"
-                className="hover:text-mda-pink transition-colors"
+                href={`mailto:${SITE_EMAIL}`}
+                className="hover:text-mda-pink transition-colors break-all"
               >
-                info@mdagh.org
+                {SITE_EMAIL}
               </a>
             </li>
-            <li className="flex gap-5 items-center">
+            <li className="flex gap-5 items-start">
               <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
                 <Phone size={16} className="text-mda-pink" />
               </div>
-              <span className="text-white/80">+233 24 457 9498</span>
+              <div className="flex flex-col gap-1">
+                {SITE_PHONES.map((phone) => (
+                  <a
+                    key={phone.href}
+                    href={phone.href}
+                    className="text-white/80 hover:text-mda-pink transition-colors"
+                  >
+                    {phone.display}
+                  </a>
+                ))}
+              </div>
             </li>
           </ul>
         </div>
