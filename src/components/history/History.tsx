@@ -50,7 +50,12 @@ const History = () => {
           <div className="order-1 lg:order-2 relative group max-w-lg mx-auto lg:max-w-none">
             <div className="aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl relative z-10 border-4 md:border-8 border-mda-cream">
               <img
-                src={new URL("../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg", import.meta.url).href}
+                src={
+                  new URL(
+                    "../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg",
+                    import.meta.url,
+                  ).href
+                }
                 alt="Mepe Historical Site"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -58,7 +63,7 @@ const History = () => {
             </div>
             {/* Floating decorative cards */}
             <div className="absolute -top-4 -right-4 bg-mda-yellow p-4 md:p-6 rounded-xl md:rounded-2xl shadow-xl z-20 hidden sm:block animate-bounce-slow">
-              <span className="block text-2xl md:text-4xl font-display text-mda-maroon tracking-tighter">
+              <span className="block text-2xl md:text-4xl font-display text-mda-maroon er">
                 100+
               </span>
               <span className="text-[8px] md:text-[10px] uppercase font-bold tracking-widest text-mda-maroon/60">

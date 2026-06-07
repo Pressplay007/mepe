@@ -21,7 +21,7 @@ const CulturePage = () => {
               <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
                 A Legacy Undefeated
               </div>
-              <h1 className="text-5xl md:text-8xl lg:text-[11rem] font-display leading-[0.9] lg:leading-[0.8] mb-6 md:mb-8 uppercase text-white tracking-tighter">
+              <h1 className="text-5xl md:text-8xl lg:text-[11rem] font-display leading-[0.9] lg:leading-[0.8] mb-6 md:mb-8 uppercase text-white er">
                 SACRED <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Heritage
@@ -53,7 +53,7 @@ const CulturePage = () => {
                   <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full border-mda-maroon/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-maroon">
                     Indigenous Core
                   </div>
-                  <h2 className="text-5xl md:text-7xl font-display text-mda-maroon leading-[0.9] lg:leading-[0.8] uppercase tracking-tighter">
+                  <h2 className="text-5xl md:text-7xl font-display text-mda-maroon leading-[0.9] lg:leading-[0.8] uppercase er">
                     THE FIVE <br />
                     <span className="text-mda-pink italic font-serif normal-case text-glow">
                       Pillars
@@ -98,7 +98,7 @@ const CulturePage = () => {
                       0{i + 1}
                     </div>
                     <div>
-                      <h3 className="text-2xl md:text-4xl font-display text-mda-maroon mb-3 md:mb-4 uppercase tracking-tighter">
+                      <h3 className="text-2xl md:text-4xl font-display text-mda-maroon mb-3 md:mb-4 uppercase er">
                         {clan.name}
                       </h3>
                       <p className="text-sm md:text-base font-body text-mda-dark/40 group-hover:text-mda-dark/80 transition-colors">
@@ -122,7 +122,12 @@ const CulturePage = () => {
                 <div className="aspect-square glass-card p-3 md:p-4 rounded-[2.2rem] md:rounded-[4rem] group-hover:-rotate-2 transition-transform duration-700">
                   <div className="w-full h-full rounded-[1.8rem] md:rounded-[3.5rem] overflow-hidden">
                     <img
-                      src={new URL("../../assets/gallery/455800117_18061206196720953_4456184814691688723_n.jpg", import.meta.url).href}
+                      src={
+                        new URL(
+                          "../../assets/gallery/455800117_18061206196720953_4456184814691688723_n.jpg",
+                          import.meta.url,
+                        ).href
+                      }
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]"
                       alt="Traditional Festival"
                     />
@@ -144,7 +149,7 @@ const CulturePage = () => {
                   <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
                     Homecoming
                   </div>
-                  <h2 className="text-5xl md:text-7xl lg:text-9xl font-display leading-[0.9] lg:leading-[0.8] tracking-tighter uppercase">
+                  <h2 className="text-5xl md:text-7xl lg:text-9xl font-display leading-[0.9] lg:leading-[0.8] er uppercase">
                     AFENORTO <br />
                     <span className="text-mda-pink italic font-serif normal-case text-glow">
                       Festival
@@ -183,7 +188,7 @@ const CulturePage = () => {
           <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32">
             <div className="space-y-8 md:space-y-12 animate-reveal">
               <div className="space-y-6 md:space-y-8 text-center lg:text-left">
-                <h2 className="text-5xl md:text-7xl font-display text-mda-maroon uppercase tracking-tighter">
+                <h2 className="text-5xl md:text-7xl font-display text-mda-maroon uppercase er">
                   INDIGENOUS <br />
                   <span className="text-mda-pink italic font-serif normal-case">
                     Attire
@@ -197,7 +202,12 @@ const CulturePage = () => {
               <div className="aspect-[16/10] glass-card p-2 md:p-3 rounded-[2rem] md:rounded-[3.5rem] overflow-hidden group">
                 <div className="w-full h-full rounded-[1.5rem] md:rounded-[3rem] overflow-hidden">
                   <img
-                    src={new URL("../../assets/gallery/Kente-Cloth-Ghanas-Cultural-Gold-Mine_010925-1-scaled.jpg", import.meta.url).href}
+                    src={
+                      new URL(
+                        "../../assets/gallery/Kente-Cloth-Ghanas-Cultural-Gold-Mine_010925-1-scaled.jpg",
+                        import.meta.url,
+                      ).href
+                    }
                     className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
                     alt="Traditional Weaving"
                   />
@@ -207,7 +217,7 @@ const CulturePage = () => {
 
             <div className="space-y-8 md:space-y-12 lg:pt-32 animate-reveal delay-300">
               <div className="space-y-6 md:space-y-8 text-center lg:text-left">
-                <h2 className="text-5xl md:text-7xl font-display text-mda-maroon uppercase tracking-tighter">
+                <h2 className="text-5xl md:text-7xl font-display text-mda-maroon uppercase er">
                   RIVER <br />
                   <span className="text-mda-pink italic font-serif normal-case">
                     Cuisine
@@ -221,10 +231,19 @@ const CulturePage = () => {
               <div className="grid grid-cols-2 gap-4 md:gap-6 pb-6 md:pb-12">
                 {[
                   {
-                    src: new URL("../../assets/gallery/images_Banku_And_Okro_Soup_277506581.jpg", import.meta.url).href,
+                    src: new URL(
+                      "../../assets/gallery/images_Banku_And_Okro_Soup_277506581.jpg",
+                      import.meta.url,
+                    ).href,
                     alt: "Banku",
                   },
-                  { src: new URL("../../assets/gallery/51030396.jpg", import.meta.url).href, alt: "Traditional Meal" },
+                  {
+                    src: new URL(
+                      "../../assets/gallery/51030396.jpg",
+                      import.meta.url,
+                    ).href,
+                    alt: "Traditional Meal",
+                  },
                 ].map((img, i) => (
                   <div
                     key={i}
@@ -248,7 +267,7 @@ const CulturePage = () => {
         <section className="py-20 md:py-40 bg-mda-cream relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 text-center space-y-12 md:space-y-24">
             <div className="space-y-4 md:space-y-6">
-              <h2 className="text-5xl md:text-7xl lg:text-9xl font-display text-mda-maroon uppercase tracking-tighter">
+              <h2 className="text-5xl md:text-7xl lg:text-9xl font-display text-mda-maroon uppercase er">
                 SACRED <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Landmarks
@@ -282,7 +301,7 @@ const CulturePage = () => {
                     <site.icon className="w-8 h-8 md:w-9 md:h-9 text-mda-pink" />
                   </div>
                   <div className="space-y-3 md:space-y-4">
-                    <h3 className="text-2xl md:text-3xl font-display text-mda-maroon uppercase tracking-tighter">
+                    <h3 className="text-2xl md:text-3xl font-display text-mda-maroon uppercase er">
                       {site.title}
                     </h3>
                     <p className="font-body text-lg md:text-xl text-mda-dark/40 leading-relaxed group-hover:text-mda-dark/60 transition-colors">

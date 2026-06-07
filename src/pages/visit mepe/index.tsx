@@ -25,7 +25,7 @@ const VisitMepePage = () => {
                 <Map size={16} className="text-mda-pink" />
                 Traveler's Protocol
               </div>
-              <h1 className="text-6xl md:text-8xl lg:text-[11rem] font-display leading-[0.9] md:leading-[0.8] mb-6 md:mb-8 uppercase tracking-tighter">
+              <h1 className="text-6xl md:text-8xl lg:text-[11rem] font-display leading-[0.9] md:leading-[0.8] mb-6 md:mb-8 uppercase er">
                 VISIT <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Mepe
@@ -53,7 +53,7 @@ const VisitMepePage = () => {
         <section className="py-20 md:py-40 bg-white relative overflow-hidden text-center">
           <div className="max-w-4xl mx-auto px-4 md:px-8 relative z-10 space-y-8 md:space-y-12">
             <div className="w-16 md:w-20 h-1 bg-mda-maroon mx-auto opacity-20" />
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display text-mda-maroon uppercase tracking-tighter leading-tight">
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-display text-mda-maroon uppercase er leading-tight">
               THE GATEWAY TO <br /> THE VOLTA
             </h2>
             <p className="font-body text-xl md:text-2xl text-mda-dark/40 leading-relaxed max-w-2xl mx-auto border-t border-mda-maroon/5 pt-8 md:pt-12">
@@ -72,7 +72,7 @@ const VisitMepePage = () => {
                 <div className="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full border-mda-maroon/5 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-maroon">
                   Authentic Experiences
                 </div>
-                <h2 className="text-5xl md:text-7xl lg:text-9xl font-display text-mda-maroon leading-[0.9] md:leading-[0.8] tracking-tighter uppercase whitespace-pre-line">
+                <h2 className="text-5xl md:text-7xl lg:text-9xl font-display text-mda-maroon leading-[0.9] md:leading-[0.8] er uppercase whitespace-pre-line">
                   CULTURAL <br />
                   <span className="text-mda-pink italic font-serif normal-case text-glow">
                     Attractions
@@ -106,7 +106,12 @@ const VisitMepePage = () => {
             <div className="relative group max-w-lg mx-auto lg:max-w-none">
               <div className="aspect-square glass-card p-3 md:p-4 rounded-[2rem] md:rounded-[4rem] group-hover:rotate-3 transition-all duration-1000 overflow-hidden shadow-2xl">
                 <img
-                  src={new URL("../../assets/gallery/456130250_18061206187720953_8453159004960842026_n.jpg", import.meta.url).href}
+                  src={
+                    new URL(
+                      "../../assets/gallery/456130250_18061206187720953_8453159004960842026_n.jpg",
+                      import.meta.url,
+                    ).href
+                  }
                   className="w-full h-full rounded-[1.8rem] md:rounded-[3.5rem] object-cover group-hover:scale-110 transition-transform duration-[2s]"
                   alt="Culture"
                 />
@@ -123,14 +128,24 @@ const VisitMepePage = () => {
             <div className="order-2 lg:order-1 grid grid-cols-2 gap-4 md:gap-8 relative">
               <div className="aspect-[4/6] glass-card p-2 md:p-3 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden mt-8 md:mt-16 group">
                 <img
-                  src={new URL("../../assets/gallery/456328911_18061206232720953_4587617597907394016_n.jpg", import.meta.url).href}
+                  src={
+                    new URL(
+                      "../../assets/gallery/456328911_18061206232720953_4587617597907394016_n.jpg",
+                      import.meta.url,
+                    ).href
+                  }
                   className="w-full h-full rounded-[1rem] md:rounded-[2.5rem] object-cover transition-all duration-1000"
                   alt="Mepe Landscape"
                 />
               </div>
               <div className="aspect-[4/6] glass-card p-2 md:p-3 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden group">
                 <img
-                  src={new URL("../../assets/gallery/456132438_18061206193720953_3368855995947669246_n.jpg", import.meta.url).href}
+                  src={
+                    new URL(
+                      "../../assets/gallery/456132438_18061206193720953_3368855995947669246_n.jpg",
+                      import.meta.url,
+                    ).href
+                  }
                   className="w-full h-full rounded-[1rem] md:rounded-[2.5rem] object-cover transition-all duration-1000"
                   alt="Traditional Setting"
                 />
@@ -146,7 +161,7 @@ const VisitMepePage = () => {
                   Sacred Topography
                 </span>
               </div>
-              <h2 className="text-5xl md:text-7xl lg:text-9xl font-display leading-[0.9] md:leading-[0.8] tracking-tighter uppercase">
+              <h2 className="text-5xl md:text-7xl lg:text-9xl font-display leading-[0.9] md:leading-[0.8] er uppercase">
                 SOUL OF THE <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Volta
@@ -178,7 +193,7 @@ const VisitMepePage = () => {
                   Local Commerce
                 </span>
               </div>
-              <h2 className="text-5xl md:text-7xl font-display text-mda-maroon leading-[0.9] md:leading-[0.8] tracking-tighter uppercase">
+              <h2 className="text-5xl md:text-7xl font-display text-mda-maroon leading-[0.9] md:leading-[0.8] er uppercase">
                 ARTISAN <br />
                 <span className="text-mda-pink italic font-serif normal-case">
                   Markets
@@ -192,7 +207,12 @@ const VisitMepePage = () => {
             <div className="aspect-video glass-card p-3 md:p-4 rounded-[2rem] md:rounded-[4rem] overflow-hidden group shadow-2xl max-w-2xl mx-auto lg:max-w-none">
               <div className="w-full h-full rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden">
                 <img
-                  src={new URL("../../assets/gallery/Makola-Market-Accra.jpg", import.meta.url).href}
+                  src={
+                    new URL(
+                      "../../assets/gallery/Makola-Market-Accra.jpg",
+                      import.meta.url,
+                    ).href
+                  }
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2s]"
                   alt="Market"
                 />
@@ -205,7 +225,7 @@ const VisitMepePage = () => {
         <section className="py-20 md:py-40 bg-mda-cream border-y border-mda-maroon/5 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 text-center space-y-12 md:space-y-24">
             <div className="space-y-6">
-              <h2 className="text-5xl md:text-7xl lg:text-9xl font-display text-mda-maroon uppercase tracking-tighter leading-tight">
+              <h2 className="text-5xl md:text-7xl lg:text-9xl font-display text-mda-maroon uppercase er leading-tight">
                 VISITOR <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Protocol
@@ -239,7 +259,7 @@ const VisitMepePage = () => {
                     <tip.icon className="w-8 md:w-9 h-8 md:h-9 text-mda-pink" />
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-2xl md:text-3xl font-display text-mda-maroon uppercase tracking-tighter">
+                    <h3 className="text-2xl md:text-3xl font-display text-mda-maroon uppercase er">
                       {tip.title}
                     </h3>
                     <p className="font-body text-base md:text-lg text-mda-dark/40 leading-relaxed group-hover:text-mda-dark/60 transition-colors">

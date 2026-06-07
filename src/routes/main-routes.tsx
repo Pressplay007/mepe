@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "../pages/landing page";
 import AboutPage from "../pages/about";
 import CulturePage from "../pages/culture";
@@ -13,9 +13,23 @@ import TermsOfService from "../pages/legal/TermsOfService";
 import GalleryPage from "../pages/gallery";
 import AnnouncementsPage from "../pages/announcements";
 
+// Admin Imports
+import AdminLayout from "../layouts/admin/AdminLayout";
+import LoginPage from "../pages/admin/LoginPage";
+import Dashboard from "../pages/admin/Dashboard";
+import TeamManagement from "../pages/admin/TeamManagement";
+import AnnouncementsManagement from "../pages/admin/AnnouncementsManagement";
+import EventsManagement from "../pages/admin/EventsManagement";
+import ProjectsManagement from "../pages/admin/ProjectsManagement";
+import MediaManagement from "../pages/admin/MediaManagement";
+import AdminManagement from "../pages/admin/AdminManagement";
+import SettingsPage from "../pages/admin/SettingsPage";
+import AuthGuard from "../components/admin/AuthGuard";
+
 const MainRoutes = () => {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/culture" element={<CulturePage />} />
@@ -29,6 +43,24 @@ const MainRoutes = () => {
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/gallery" element={<GalleryPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
+
+      {/* Admin Routes */}
+      <Route path="/admin/login" element={<LoginPage />} />
+      <Route element={<AuthGuard />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/team" element={<TeamManagement />} />
+          <Route path="/admin/announcements" element={<AnnouncementsManagement />} />
+          <Route path="/admin/events" element={<EventsManagement />} />
+          <Route path="/admin/projects" element={<ProjectsManagement />} />
+          <Route path="/admin/media" element={<MediaManagement />} />
+          <Route path="/admin/administrators" element={<AdminManagement />} />
+          <Route path="/admin/settings" element={<SettingsPage />} />
+        </Route>
+      </Route>
+
+      {/* Catch-all - Redirect admin root to dashboard */}
+      <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
     </Routes>
   );
 };

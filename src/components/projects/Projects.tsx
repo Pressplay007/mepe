@@ -5,7 +5,10 @@ const Projects = () => {
     {
       title: "Water Resource & Agriculture",
       category: "Sustainability",
-      image: new URL("../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg", import.meta.url).href,
+      image: new URL(
+        "../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg",
+        import.meta.url,
+      ).href,
       status: "Early Stage",
       progress: 1,
       Icon: Droplets,
@@ -13,7 +16,10 @@ const Projects = () => {
     {
       title: "Youth Skills & Entrepreneurship",
       category: "Empowerment",
-      image: new URL("../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg", import.meta.url).href,
+      image: new URL(
+        "../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg",
+        import.meta.url,
+      ).href,
       status: "Planned",
       progress: 1,
       Icon: Laptop,
@@ -21,7 +27,10 @@ const Projects = () => {
     {
       title: "Education Development",
       category: "Education",
-      image: new URL("../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg", import.meta.url).href,
+      image: new URL(
+        "../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg",
+        import.meta.url,
+      ).href,
       status: "Planned",
       progress: 1,
       Icon: BookOpen,
@@ -39,13 +48,13 @@ const Projects = () => {
           <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
             Visionary Growth
           </div>
-          <h2 className="text-5xl md:text-7xl lg:text-9xl font-display leading-[0.9] lg:leading-[0.8] tracking-tighter uppercase whitespace-pre-line">
+          <h2 className="text-5xl md:text-7xl lg:text-9xl font-display leading-[0.9] lg:leading-[0.8] er uppercase whitespace-pre-line">
             FEATURED <br />
             <span className="text-mda-pink italic font-serif normal-case text-glow">
               Projects
             </span>
           </h2>
-          <p className="font-body text-lg md:text-xl text-white/40 tracking-tight leading-relaxed max-w-lg">
+          <p className="font-body text-lg md:text-xl text-white/40  leading-relaxed max-w-lg">
             Strategically investing in sustainable development to secure the
             prosperity of the Mepe Traditional Area.
           </p>
@@ -82,7 +91,7 @@ const Projects = () => {
               </div>
 
               <div className="px-2 md:px-4 pb-4 space-y-4 md:space-y-6">
-                <h3 className="text-3xl md:text-4xl font-display leading-tight uppercase tracking-tight group-hover:text-mda-pink transition-colors">
+                <h3 className="text-3xl md:text-4xl font-display leading-tight uppercase  group-hover:text-mda-pink transition-colors">
                   {project.title}
                 </h3>
 

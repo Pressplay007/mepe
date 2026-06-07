@@ -30,7 +30,7 @@ const ContactPage = () => {
               <div className="inline-flex items-center gap-3 px-3 py-1.5 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[9px] text-mda-pink">
                 Transmission
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-8xl font-display leading-[0.9] lg:leading-[0.85] mb-4 md:mb-6 uppercase text-white tracking-tighter">
+              <h1 className="text-4xl md:text-6xl lg:text-8xl font-display leading-[0.9] lg:leading-[0.85] mb-4 md:mb-6 uppercase text-white er">
                 CONTACT THE <br className="hidden md:block" />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   MDA
@@ -51,7 +51,7 @@ const ContactPage = () => {
             <div className="glass-card bg-white p-6 md:p-10 lg:p-16 rounded-[8px] md:rounded-[10px] border-white shadow-[0_40px_100px_-20px_rgba(93,26,26,0.1)]">
               <div className="space-y-8 md:space-y-12">
                 <div className="space-y-3 md:space-y-4">
-                  <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase tracking-tighter leading-none">
+                  <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase er leading-none">
                     SEND A <br />
                     <span className="text-mda-pink italic font-serif normal-case">
                       Message
@@ -127,18 +127,28 @@ const ContactPage = () => {
                   <Handshake size={24} className="text-mda-pink" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-xl md:text-3xl font-display uppercase leading-tight tracking-tighter">
+                  <h3 className="text-xl md:text-3xl font-display uppercase leading-tight er">
                     PARTNERSHIP <br />
                     <span className="text-mda-pink">PROTOCOLS</span>
                   </h3>
                   <p className="font-body text-white/60 text-xs md:text-sm leading-relaxed">
-                    We are open to strategic collaborations with NGOs and private investors.
+                    We are open to strategic collaborations with NGOs and
+                    private investors.
                   </p>
                 </div>
                 <ul className="space-y-2 md:space-y-3 font-display text-lg md:text-xl uppercase italic text-mda-pink/80">
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-mda-pink" /> Agriculture</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-mda-pink" /> Edu-Tech</li>
-                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 rounded-full bg-mda-pink" /> Sustainable Dev</li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-mda-pink" />{" "}
+                    Agriculture
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-mda-pink" />{" "}
+                    Edu-Tech
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-mda-pink" />{" "}
+                    Sustainable Dev
+                  </li>
                 </ul>
               </div>
 
@@ -150,8 +160,12 @@ const ContactPage = () => {
                       <MapPin className="w-5 h-5 text-mda-pink" />
                     </div>
                     <div>
-                      <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">LOCATION</h4>
-                      <p className="font-bold text-sm leading-snug">Mepe Community Hub, North Tongu, VR</p>
+                      <h4 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">
+                        LOCATION
+                      </h4>
+                      <p className="font-bold text-sm leading-snug">
+                        Mepe Community Hub, North Tongu, VR
+                      </p>
                     </div>
                   </div>
 
@@ -160,7 +174,9 @@ const ContactPage = () => {
                       <Mail className="w-4 h-4 text-mda-pink" />
                     </div>
                     <div>
-                      <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">EMAIL</h5>
+                      <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">
+                        EMAIL
+                      </h5>
                       <p className="font-bold text-sm">info@mdagh.org</p>
                     </div>
                   </div>
@@ -170,7 +186,9 @@ const ContactPage = () => {
                       <Phone className="w-4 h-4 text-mda-pink" />
                     </div>
                     <div>
-                      <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">PHONE</h5>
+                      <h5 className="text-[9px] font-bold uppercase tracking-[0.2em] text-mda-maroon/40 mb-1">
+                        PHONE
+                      </h5>
                       <p className="font-bold text-sm">+233 24 457 9498</p>
                     </div>
                   </div>
@@ -178,7 +196,11 @@ const ContactPage = () => {
 
                 <div className="flex items-center gap-3 pt-6 border-t border-mda-maroon/5">
                   {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                    <a key={i} href="#" className="w-9 h-9 rounded-lg bg-mda-cream flex items-center justify-center hover:bg-mda-pink hover:text-mda-maroon transition-all group">
+                    <a
+                      key={i}
+                      href="#"
+                      className="w-9 h-9 rounded-lg bg-mda-cream flex items-center justify-center hover:bg-mda-pink hover:text-mda-maroon transition-all group"
+                    >
                       <Icon className="w-4 h-4 transition-transform group-hover:scale-110" />
                     </a>
                   ))}

@@ -7,11 +7,53 @@ export default {
   theme: {
     extend: {
       colors: {
-        'mda-cream': '#FCF5E5',
-        'mda-maroon': '#41061C',
-        'mda-pink': '#F9A4B4',
-        'mda-yellow': '#FAE5A8',
-        'mda-dark': '#41061C',
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+
+        card: {
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
+        },
+
+        popover: {
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
+        },
+
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
+
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
+        },
+
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
+
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+
+        "mda-cream": "#FCF5E5",
+        "mda-maroon": "#41061C",
+        "mda-pink": "#F9A4B4",
+        "mda-yellow": "#FAE5A8",
+        "mda-dark": "#41061C",
       },
       fontFamily: {
         body: ['Inter', 'sans-serif'],

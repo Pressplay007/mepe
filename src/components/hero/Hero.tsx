@@ -28,7 +28,7 @@ const Hero = () => {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-display leading-[0.9] lg:leading-[0.8] uppercase text-white tracking-tighter">
+            <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-display leading-[0.9] lg:leading-[0.8] uppercase text-white er">
               VISIT <br />
               <span className="text-mda-pink italic font-serif normal-case drop-shadow-2xl text-glow">
                 Mepe

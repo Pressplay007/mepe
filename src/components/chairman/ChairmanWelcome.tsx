@@ -45,7 +45,7 @@ const ChairmanWelcome = () => {
                 </span>
               </div>
 
-              <h2 className="text-4xl md:text-6xl lg:text-8xl font-display text-mda-maroon leading-[0.9] lg:leading-[0.8] uppercase tracking-tighter">
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-display text-mda-maroon leading-[0.9] lg:leading-[0.8] uppercase er">
                 LEADERSHIP & <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Visionary Growth
@@ -54,7 +54,7 @@ const ChairmanWelcome = () => {
             </div>
 
             <div className="space-y-4 md:space-y-6 text-mda-dark/70 text-base md:text-lg leading-relaxed font-body border-l-2 border-mda-pink/20 pl-6 md:pl-10 py-2">
-              <p className="font-semibold text-mda-maroon text-xl md:text-2xl italic tracking-tight">
+              <p className="font-semibold text-mda-maroon text-xl md:text-2xl italic ">
                 "It is with great honor and pride that I welcome you to our
                 active community."
               </p>
@@ -73,13 +73,10 @@ const ChairmanWelcome = () => {
 
             <div className="flex items-center gap-4 md:gap-6 pt-4">
               <div className="w-12 md:w-16 h-12 md:h-16 rounded-full overflow-hidden border-2 border-mda-pink shadow-lg">
-                <img
-                  src={Chairman}
-                  className="w-full h-full object-cover"
-                />
+                <img src={Chairman} className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-2xl md:text-3xl text-mda-maroon tracking-tight">
+                <span className="font-display text-2xl md:text-3xl text-mda-maroon ">
                   Mr. Bismark Fiifi Tetteh
                 </span>
                 <span className="text-mda-pink font-bold tracking-[0.2em] uppercase text-[8px] md:text-[10px]">

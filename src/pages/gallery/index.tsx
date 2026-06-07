@@ -1,4 +1,12 @@
-import { Camera, Layers, X, ChevronLeft, ChevronRight, Play, Film } from "lucide-react";
+import {
+  Camera,
+  Layers,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Film,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import SEO from "../../components/common/SEO";
 
@@ -6,125 +14,226 @@ const Gallery = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
 
-
   const images = [
     {
-      src: new URL("../../assets/gallery/456251856_18061206280720953_4691208955845474968_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456251856_18061206280720953_4691208955845474968_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Mepe Tradition",
     },
     {
-      src: new URL("../../assets/gallery/455800117_18061206196720953_4456184814691688723_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/455800117_18061206196720953_4456184814691688723_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Festival Spirit",
     },
     {
-      src: new URL("../../assets/gallery/Kente-Cloth-Ghanas-Cultural-Gold-Mine_010925-1-scaled.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/Kente-Cloth-Ghanas-Cultural-Gold-Mine_010925-1-scaled.jpg",
+        import.meta.url,
+      ).href,
       title: "Cultural Artistry",
     },
-    { src: new URL("../../assets/gallery/images_Banku_And_Okro_Soup_277506581.jpg", import.meta.url).href, title: "Local Tastes" },
-    { src: new URL("../../assets/gallery/Makola-Market-Accra.jpg", import.meta.url).href, title: "Market Life" },
     {
-      src: new URL("../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/images_Banku_And_Okro_Soup_277506581.jpg",
+        import.meta.url,
+      ).href,
+      title: "Local Tastes",
+    },
+    {
+      src: new URL(
+        "../../assets/gallery/Makola-Market-Accra.jpg",
+        import.meta.url,
+      ).href,
+      title: "Market Life",
+    },
+    {
+      src: new URL(
+        "../../assets/gallery/455991774_18061206271720953_6194218305811081143_n.jpg",
+        import.meta.url,
+      ).href,
       title: "River Volta",
     },
     {
-      src: new URL("../../assets/gallery/456130250_18061206187720953_8453159004960842026_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456130250_18061206187720953_8453159004960842026_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Rhythm of Mepe",
     },
     {
-      src: new URL("../../assets/gallery/456328911_18061206232720953_4587617597907394016_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456328911_18061206232720953_4587617597907394016_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Mepe Landscape",
     },
     {
-      src: new URL("../../assets/gallery/456132438_18061206193720953_3368855995947669246_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456132438_18061206193720953_3368855995947669246_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Development Site",
     },
     {
-      src: new URL("../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456184220_18061206241720953_5588583274442341449_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Future Leaders",
     },
     {
-      src: new URL("../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Skills Training",
     },
     {
-      src: new URL("../../assets/gallery/455721395_18061206301720953_6554931698407349356_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/455721395_18061206301720953_6554931698407349356_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Community Unity",
     },
     {
-      src: new URL("../../assets/gallery/456217266_18061206190720953_9190619641682968041_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456217266_18061206190720953_9190619641682968041_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Heritage",
     },
     {
-      src: new URL("../../assets/gallery/456314736_18061206244720953_3574851341763144433_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/456314736_18061206244720953_3574851341763144433_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Project Progress",
     },
     {
-      src: new URL("../../assets/gallery/505730882_1301467045319971_4163705806737903282_n.jpg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/505730882_1301467045319971_4163705806737903282_n.jpg",
+        import.meta.url,
+      ).href,
       title: "Youth Mentorship",
     },
-    { src: new URL("../../assets/gallery/51030396.jpg", import.meta.url).href, title: "Community Life" },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (1).jpeg", import.meta.url).href,
+      src: new URL("../../assets/gallery/51030396.jpg", import.meta.url).href,
+      title: "Community Life",
+    },
+    {
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (1).jpeg",
+        import.meta.url,
+      ).href,
       title: "Community Moment",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (2).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (2).jpeg",
+        import.meta.url,
+      ).href,
       title: "Local Interaction",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (3).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (3).jpeg",
+        import.meta.url,
+      ).href,
       title: "Project Site",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (4).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (4).jpeg",
+        import.meta.url,
+      ).href,
       title: "Village Scene",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (5).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (5).jpeg",
+        import.meta.url,
+      ).href,
       title: "Traditional Event",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (6).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (6).jpeg",
+        import.meta.url,
+      ).href,
       title: "Market Scene",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (7).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (7).jpeg",
+        import.meta.url,
+      ).href,
       title: "Nature & Life",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (8).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (8).jpeg",
+        import.meta.url,
+      ).href,
       title: "Landscape View",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (9).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (9).jpeg",
+        import.meta.url,
+      ).href,
       title: "Community Members",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (10).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (10).jpeg",
+        import.meta.url,
+      ).href,
       title: "Education Project",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (11).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (11).jpeg",
+        import.meta.url,
+      ).href,
       title: "Skills Hub",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (12).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (12).jpeg",
+        import.meta.url,
+      ).href,
       title: "Future Prospects",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (13).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (13).jpeg",
+        import.meta.url,
+      ).href,
       title: "Local Heritage",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (14).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (14).jpeg",
+        import.meta.url,
+      ).href,
       title: "Tradition Alive",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (15).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (15).jpeg",
+        import.meta.url,
+      ).href,
       title: "Community Growth",
     },
     {
-      src: new URL("../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (16).jpeg", import.meta.url).href,
+      src: new URL(
+        "../../assets/gallery/WhatsApp Image 2026-03-12 at 06.48.02 (16).jpeg",
+        import.meta.url,
+      ).href,
       title: "Mepe Forward",
     },
   ];
@@ -189,7 +298,7 @@ const Gallery = () => {
                 <Camera className="w-3.5 h-3.5 md:w-4 md:h-4 text-mda-pink" />
                 Visual Protocol
               </div>
-              <h1 className="text-5xl md:text-8xl lg:text-[11rem] font-display leading-[0.9] lg:leading-[0.8] mb-6 md:mb-8 uppercase text-white tracking-tighter">
+              <h1 className="text-5xl md:text-8xl lg:text-[11rem] font-display leading-[0.9] lg:leading-[0.8] mb-6 md:mb-8 uppercase text-white er">
                 MEPE <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Gallery
@@ -256,7 +365,7 @@ const Gallery = () => {
                   <Film className="w-4 h-4" />
                   Motion Archives
                 </div>
-                <h2 className="text-5xl md:text-8xl font-display uppercase leading-[0.9] tracking-tighter">
+                <h2 className="text-5xl md:text-8xl font-display uppercase leading-[0.9] er">
                   Kinetic <br />
                   <span className="text-mda-pink italic font-serif normal-case">
                     Intelligence
@@ -295,12 +404,12 @@ const Gallery = () => {
                     <div className="absolute top-6 left-6 md:top-8 md:left-8">
                       <span className="px-5 py-2 md:px-6 md:py-3 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-mda-pink">
                         {video.category}
-                      </span> 
+                      </span>
                     </div>
                   </div>
 
                   <div className="mt-8 md:mt-12 space-y-3 md:space-y-4 px-4">
-                    <h3 className="text-2xl md:text-4xl font-display uppercase tracking-tight text-white group-hover:text-mda-pink transition-colors">
+                    <h3 className="text-2xl md:text-4xl font-display uppercase  text-white group-hover:text-mda-pink transition-colors">
                       {/* {video.title} */}
                     </h3>
                     <div className="w-12 h-1 bg-mda-pink/30 group-hover:w-full transition-all duration-700" />
@@ -310,7 +419,6 @@ const Gallery = () => {
             </div>
           </div>
         </section>
-
 
         {/* Lightbox Modal */}
         {selectedIndex !== null && (
@@ -365,7 +473,7 @@ const Gallery = () => {
               </div>
 
               <div className="text-center space-y-4 md:space-y-6 animate-in slide-in-from-bottom-12 duration-1000 px-4">
-                <h3 className="text-3xl md:text-6xl lg:text-8xl font-display text-white uppercase italic tracking-tighter">
+                <h3 className="text-3xl md:text-6xl lg:text-8xl font-display text-white uppercase italic er">
                   {images[selectedIndex].title}
                 </h3>
                 <div className="h-0.5 w-24 md:w-32 bg-mda-pink mx-auto" />
@@ -421,14 +529,13 @@ const Gallery = () => {
           </div>
         )}
 
-
         {/* Call to Action */}
         <section className="py-20 md:py-40 bg-mda-cream relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 text-center space-y-8 md:space-y-12">
             <div className="w-16 md:w-20 h-16 md:h-20 bg-mda-maroon rounded-[1.5rem] md:rounded-3xl flex items-center justify-center mx-auto mb-8 md:mb-12 shadow-2xl">
               <Layers className="w-8 h-8 md:w-10 md:h-10 text-mda-pink" />
             </div>
-            <h2 className="text-4xl md:text-7xl lg:text-9xl font-display text-mda-maroon uppercase leading-[0.9] lg:leading-none tracking-tighter">
+            <h2 className="text-4xl md:text-7xl lg:text-9xl font-display text-mda-maroon uppercase leading-[0.9] lg:leading-none er">
               CITIZEN <br />
               <span className="text-mda-pink italic font-serif normal-case text-glow">
                 Archives

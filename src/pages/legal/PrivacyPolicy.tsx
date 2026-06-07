@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
               <div className="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
                 Encrypted Protocol
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-[10rem] font-display leading-[0.9] md:leading-[0.8] mb-6 md:mb-8 uppercase text-white tracking-tighter">
+              <h1 className="text-5xl md:text-7xl lg:text-[10rem] font-display leading-[0.9] md:leading-[0.8] mb-6 md:mb-8 uppercase text-white er">
                 PRIVACY <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Shield
@@ -70,7 +70,7 @@ const PrivacyPolicy = () => {
                   <section.icon className="text-mda-pink w-7 md:w-9 h-7 md:h-9" />
                 </div>
                 <div className="space-y-4 md:space-y-6">
-                  <h2 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase tracking-tighter">
+                  <h2 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase er">
                     {section.title}
                   </h2>
                   <p className="font-body text-mda-dark/50 leading-relaxed text-lg md:text-xl border-l border-mda-pink/10 pl-6 md:pl-8 italic">

@@ -1,29 +1,33 @@
-import { useState } from 'react';
-import SEO from '../../components/common/SEO';
-import { announcements, type Announcement } from '../../data/announcements';
-import { X, FileText, Calendar, Tag } from 'lucide-react';
+import { useState } from "react";
+import SEO from "../../components/common/SEO";
+import { announcements, type Announcement } from "../../data/announcements";
+import { X, FileText, Calendar, Tag } from "lucide-react";
 
 const AnnouncementsPage = () => {
-  const [selectedAnnouncement, setSelectedAnnouncement] = useState<Announcement | null>(null);
+  const [selectedAnnouncement, setSelectedAnnouncement] =
+    useState<Announcement | null>(null);
 
   return (
     <div className="bg-mda-cream min-h-screen pt-32 pb-24">
-      <SEO 
-        title="Announcements | Mepe Development Association" 
+      <SEO
+        title="Announcements | Mepe Development Association"
         description="Stay updated with the latest news, events, and official announcements from the Mepe Development Association."
       />
-      
+
       <div className="container mx-auto px-6">
         <header className="mb-16">
           <h1 className="text-7xl md:text-9xl font-display text-mda-maroon leading-none animate-reveal">
             OFFICIAL <span className="text-mda-pink">UPDATES</span>
           </h1>
-          <div className="h-2 w-32 bg-mda-pink mt-6 animate-reveal" style={{ animationDelay: '200ms' }}></div>
+          <div
+            className="h-2 w-32 bg-mda-pink mt-6 animate-reveal"
+            style={{ animationDelay: "200ms" }}
+          ></div>
         </header>
 
         <div className="grid gap-8">
           {announcements.map((item, index) => (
-            <div 
+            <div
               key={item.id}
               className="group bg-white border border-mda-maroon/10 p-8 md:p-12 transition-all duration-500 hover:shadow-2xl hover:shadow-mda-maroon/5 flex flex-col md:flex-row gap-8 items-start animate-reveal cursor-pointer"
               style={{ animationDelay: `${index * 150}ms` }}
@@ -33,13 +37,17 @@ const AnnouncementsPage = () => {
                 <div className="text-mda-pink font-display text-2xl uppercase tracking-widest mb-2">
                   {item.date}
                 </div>
-                <div className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-tighter ${
-                  item.isOfficial ? "bg-mda-maroon text-white" : "bg-mda-maroon/5 text-mda-maroon"
-                }`}>
+                <div
+                  className={`inline-block px-3 py-1 text-[10px] font-bold uppercase er ${
+                    item.isOfficial
+                      ? "bg-mda-maroon text-white"
+                      : "bg-mda-maroon/5 text-mda-maroon"
+                  }`}
+                >
                   {item.category}
                 </div>
               </div>
-              
+
               <div className="flex-grow">
                 <h2 className="text-4xl md:text-5xl font-display text-mda-maroon mb-4 group-hover:text-mda-pink transition-colors">
                   {item.title}
@@ -48,7 +56,7 @@ const AnnouncementsPage = () => {
                   {item.summary}
                 </p>
                 <button className="mt-8 flex items-center gap-2 text-mda-maroon font-bold uppercase tracking-widest text-xs group/btn">
-                  Read Full Announcement 
+                  Read Full Announcement
                   <span className="w-8 h-[1px] bg-mda-maroon group-hover/btn:w-12 transition-all duration-300"></span>
                 </button>
               </div>
@@ -60,13 +68,13 @@ const AnnouncementsPage = () => {
       {/* Announcement Modal */}
       {selectedAnnouncement && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8">
-          <div 
+          <div
             className="absolute inset-0 bg-mda-maroon/90 backdrop-blur-sm transition-opacity"
             onClick={() => setSelectedAnnouncement(null)}
           ></div>
-          
+
           <div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl animate-reveal-up border-t-8 border-mda-pink">
-            <button 
+            <button
               className="absolute top-6 right-6 text-mda-maroon hover:text-mda-pink transition-colors z-10"
               onClick={() => setSelectedAnnouncement(null)}
             >
@@ -101,11 +109,15 @@ const AnnouncementsPage = () => {
                     <FileText size={18} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-tighter text-mda-maroon/40">Issued by</p>
-                    <p className="text-xs font-bold text-mda-maroon">Mepe Development Association</p>
+                    <p className="text-[10px] font-bold uppercase er text-mda-maroon/40">
+                      Issued by
+                    </p>
+                    <p className="text-xs font-bold text-mda-maroon">
+                      Mepe Development Association
+                    </p>
                   </div>
                 </div>
-                <button 
+                <button
                   onClick={() => setSelectedAnnouncement(null)}
                   className="bg-mda-maroon text-white px-8 py-3 font-bold uppercase tracking-widest text-[10px] hover:bg-mda-pink transition-colors"
                 >
@@ -117,7 +129,9 @@ const AnnouncementsPage = () => {
         </div>
       )}
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @keyframes reveal-up {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
@@ -125,7 +139,9 @@ const AnnouncementsPage = () => {
         .animate-reveal-up {
           animation: reveal-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
-      `}} />
+      `,
+        }}
+      />
     </div>
   );
 };

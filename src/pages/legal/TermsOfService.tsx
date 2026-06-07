@@ -42,7 +42,7 @@ const TermsOfService = () => {
               <div className="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
                 User Agreement
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-[10rem] font-display leading-[0.9] md:leading-[0.8] mb-6 md:mb-8 uppercase text-white tracking-tighter">
+              <h1 className="text-5xl md:text-7xl lg:text-[10rem] font-display leading-[0.9] md:leading-[0.8] mb-6 md:mb-8 uppercase text-white er">
                 TERMS OF <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Service
@@ -64,7 +64,7 @@ const TermsOfService = () => {
                   className="glass-card bg-white p-8 md:p-12 lg:p-20 rounded-[2.5rem] md:rounded-[4rem] border-white shadow-[0_40px_100px_-20px_rgba(93,26,26,0.05)] space-y-6 md:space-y-8 group hover:-translate-y-2 transition-all duration-700"
                 >
                   <div className="flex items-center justify-between">
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-display text-mda-maroon uppercase tracking-tighter flex items-center gap-4 md:gap-6 leading-none">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-display text-mda-maroon uppercase er flex items-center gap-4 md:gap-6 leading-none">
                       <span className="text-mda-pink italic font-serif opacity-30 group-hover:opacity-100 transition-opacity">
                         0{i + 1}.
                       </span>
@@ -83,7 +83,7 @@ const TermsOfService = () => {
               <div className="w-20 md:w-24 h-20 md:h-24 glass-card bg-mda-pink rounded-2xl md:rounded-3xl flex items-center justify-center shrink-0 shadow-2xl animate-float">
                 <AlertCircle className="text-mda-maroon w-10 md:w-12 h-10 md:h-12" />
               </div>
-              <p className="font-display text-xl md:text-2xl lg:text-4xl text-white/80 uppercase italic leading-tight tracking-tighter text-center md:text-left">
+              <p className="font-display text-xl md:text-2xl lg:text-4xl text-white/80 uppercase italic leading-tight er text-center md:text-left">
                 The usage of this system implies full acceptance of these
                 protocols. The MDA reserves the right to re-initialize these
                 terms at any sync point.

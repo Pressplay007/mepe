@@ -6,6 +6,7 @@ export interface Announcement {
   summary: string;
   content: string;
   isOfficial?: boolean;
+  status?: 'Published' | 'Scheduled' | 'Draft';
 }
 
 export const announcements: Announcement[] = [

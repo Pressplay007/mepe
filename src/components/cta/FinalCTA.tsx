@@ -7,14 +7,14 @@ const FinalCTA = () => {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 text-center">
         <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
-          <h2 className="text-4xl md:text-7xl lg:text-9xl font-display text-mda-maroon leading-[0.9] lg:leading-[0.85] tracking-tighter">
+          <h2 className="text-4xl md:text-7xl lg:text-9xl font-display text-mda-maroon leading-[0.9] lg:leading-[0.85] er">
             JOIN US IN <br />
             <span className="text-mda-pink italic font-serif normal-case text-2xl md:text-5xl lg:text-7xl">
               Building Mepe Together
             </span>
           </h2>
 
-          <p className="text-lg md:text-xl lg:text-2xl font-body text-mda-dark/70 tracking-tight max-w-2xl mx-auto px-4 md:px-0">
+          <p className="text-lg md:text-xl lg:text-2xl font-body text-mda-dark/70  max-w-2xl mx-auto px-4 md:px-0">
             Whether you are a citizen, a visitor, or a partner, your
             contribution shapes the future of our historic community.
           </p>

@@ -51,7 +51,7 @@ const ApplyGrantPage = () => {
               <Send className="w-8 h-8 text-mda-pink" />
             </div>
             <div className="space-y-3">
-              <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase er leading-tight">
                 SUBMITTED <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case">
                   Successfully
@@ -99,7 +99,7 @@ const ApplyGrantPage = () => {
             </Link>
 
             <div className="max-w-3xl space-y-6 text-center md:text-left">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display leading-[1] mb-4 uppercase text-white tracking-tighter">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display leading-[1] mb-4 uppercase text-white er">
                 GRANT <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Application
@@ -121,7 +121,7 @@ const ApplyGrantPage = () => {
                 <Info size={20} className="text-mda-pink" />
               </div>
               <div>
-                <h3 className="text-xl md:text-2xl font-display text-mda-maroon uppercase tracking-tight">
+                <h3 className="text-xl md:text-2xl font-display text-mda-maroon uppercase ">
                   HOW TO{" "}
                   <span className="text-mda-pink italic font-serif normal-case ml-1">
                     Apply
@@ -182,7 +182,7 @@ const ApplyGrantPage = () => {
                     <User size={20} className="text-mda-pink" />
                   </div>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-display text-mda-maroon uppercase tracking-tight">
+                    <h3 className="text-xl md:text-2xl font-display text-mda-maroon uppercase ">
                       APPLICATION{" "}
                       <span className="text-mda-pink italic font-serif normal-case ml-1">
                         Information
@@ -307,7 +307,7 @@ const ApplyGrantPage = () => {
                           <Upload className="text-mda-pink" size={18} />
                         </div>
                         <div>
-                          <p className="font-display text-base text-mda-maroon uppercase italic tracking-tight">
+                          <p className="font-display text-base text-mda-maroon uppercase italic ">
                             {idFile ? idFile.name : "Click to Upload ID"}
                           </p>
                           <p className="font-body text-mda-dark/30 text-[10px]">
@@ -338,7 +338,7 @@ const ApplyGrantPage = () => {
                           <Upload className="text-mda-pink" size={18} />
                         </div>
                         <div>
-                          <p className="font-display text-base text-mda-maroon uppercase italic tracking-tight">
+                          <p className="font-display text-base text-mda-maroon uppercase italic ">
                             {docFile ? docFile.name : "Upload Documents"}
                           </p>
                           <p className="font-body text-mda-dark/30 text-[10px]">
@@ -370,7 +370,7 @@ const ApplyGrantPage = () => {
         {/* Footer Note */}
         <section className="py-16 md:py-20 bg-mda-cream border-t border-mda-maroon/5">
           <div className="max-w-2xl mx-auto px-4 md:px-8 text-center space-y-6">
-            <h4 className="text-2xl md:text-3xl text-mda-maroon font-display uppercase italic tracking-tighter">
+            <h4 className="text-2xl md:text-3xl text-mda-maroon font-display uppercase italic er">
               Need Help?
             </h4>
             <p className="font-body text-mda-dark/50 text-base leading-relaxed">

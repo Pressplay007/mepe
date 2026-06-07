@@ -22,7 +22,7 @@ const AboutPage = () => {
               <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
                 Our Identity
               </div>
-              <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-display leading-[0.9] lg:leading-[0.8] mb-6 md:mb-8 uppercase text-white tracking-tighter">
+              <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-display leading-[0.9] lg:leading-[0.8] mb-6 md:mb-8 uppercase text-white er">
                 BEYOND <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Development
@@ -43,7 +43,7 @@ const AboutPage = () => {
             <div className="space-y-6 md:space-y-10 group">
               <div className="flex items-center justify-center lg:justify-start gap-6">
                 <div className="w-12 md:w-16 h-1 bg-mda-pink group-hover:w-24 transition-all duration-700" />
-                <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase tracking-tighter">
+                <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase er">
                   OUR VISION
                 </h2>
               </div>
@@ -56,7 +56,7 @@ const AboutPage = () => {
             <div className="space-y-6 md:space-y-10 group">
               <div className="flex items-center justify-center lg:justify-start gap-6">
                 <div className="w-12 md:w-16 h-1 bg-mda-pink group-hover:w-24 transition-all duration-700" />
-                <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase tracking-tighter">
+                <h2 className="text-3xl md:text-5xl font-display text-mda-maroon uppercase er">
                   OUR MISSION
                 </h2>
               </div>
@@ -77,7 +77,7 @@ const AboutPage = () => {
             <div className="inline-flex items-center gap-3 px-4 py-2 glass-card rounded-full border-white/10 uppercase font-bold tracking-[0.3em] text-[8px] md:text-[10px] text-mda-pink">
               Governance
             </div>
-            <h2 className="text-5xl md:text-7xl lg:text-[10rem] font-display uppercase leading-[0.9] lg:leading-[0.8] tracking-tighter">
+            <h2 className="text-5xl md:text-7xl lg:text-[10rem] font-display uppercase leading-[0.9] lg:leading-[0.8] er">
               TRADITIONAL <br />
               <span className="text-mda-pink italic font-serif normal-case text-glow">
                 Leadership
@@ -115,7 +115,7 @@ const AboutPage = () => {
                 <div className="text-[8px] md:text-[10px] font-bold tracking-[0.3em] text-mda-pink mb-6 md:mb-10 uppercase transition-colors">
                   {leader.role}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-display mb-4 md:mb-6 leading-tight uppercase tracking-tight">
+                <h3 className="text-2xl md:text-3xl font-display mb-4 md:mb-6 leading-tight uppercase ">
                   {leader.title}
                 </h3>
                 <p className="font-body text-xs md:text-sm text-white/40 leading-relaxed group-hover:text-white/80 transition-all">
@@ -163,7 +163,7 @@ const AboutPage = () => {
                   >
                     <pillar.icon className="w-8 md:w-10 h-8 md:h-10 text-mda-maroon transition-colors group-hover:text-mda-pink" />
                   </div>
-                  <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase tracking-tighter">
+                  <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase er">
                     {pillar.title}
                   </h3>
                   <p className="font-body text-lg md:text-xl text-mda-dark/40 leading-relaxed max-w-sm">
@@ -184,7 +184,12 @@ const AboutPage = () => {
               <div className="aspect-[4/5] glass-card p-3 md:p-4 rounded-[2rem] md:rounded-[4rem] group-hover:rotate-2 transition-transform duration-700">
                 <div className="w-full h-full rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden">
                   <img
-                    src={new URL("../../assets/gallery/455721395_18061206301720953_6554931698407349356_n.jpg", import.meta.url).href}
+                    src={
+                      new URL(
+                        "../../assets/gallery/455721395_18061206301720953_6554931698407349356_n.jpg",
+                        import.meta.url,
+                      ).href
+                    }
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]"
                     alt="Community Meeting"
                   />
@@ -195,7 +200,7 @@ const AboutPage = () => {
             </div>
 
             <div className="space-y-8 md:space-y-12">
-              <h2 className="text-5xl md:text-7xl lg:text-[10rem] font-display leading-[0.9] lg:leading-[0.8] tracking-tighter uppercase whitespace-pre-line">
+              <h2 className="text-5xl md:text-7xl lg:text-[10rem] font-display leading-[0.9] lg:leading-[0.8] er uppercase whitespace-pre-line">
                 HISTORY OF <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Service

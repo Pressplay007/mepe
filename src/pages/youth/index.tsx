@@ -31,7 +31,7 @@ const YouthPage = () => {
                 <Rocket size={16} className="text-mda-pink" />
                 Youth Hub Protocol
               </div>
-              <h1 className="text-8xl lg:text-[11rem] font-display leading-[0.8] mb-8 uppercase text-white tracking-tighter">
+              <h1 className="text-8xl lg:text-[11rem] font-display leading-[0.8] mb-8 uppercase text-white er">
                 BEYOND <br />{" "}
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Limits
@@ -49,7 +49,7 @@ const YouthPage = () => {
         <section className="py-40 bg-white relative overflow-hidden">
           <div className="max-w-4xl mx-auto px-8 relative z-10 text-center space-y-12">
             <div className="w-20 h-1 bg-mda-maroon mx-auto opacity-20" />
-            <h2 className="text-5xl lg:text-7xl font-display text-mda-maroon uppercase tracking-tighter">
+            <h2 className="text-5xl lg:text-7xl font-display text-mda-maroon uppercase er">
               THE FORCE OF <br /> PROGRESS
             </h2>
             <p className="font-body text-2xl text-mda-dark/40 leading-relaxed max-w-2xl mx-auto border-t border-mda-maroon/5 pt-12">
@@ -76,7 +76,7 @@ const YouthPage = () => {
                 <div className="inline-flex items-center gap-3 px-5 py-2 glass-card rounded-full border-mda-maroon/5 uppercase font-bold tracking-[0.3em] text-[10px] text-mda-maroon">
                   Innovation Pipelines
                 </div>
-                <h2 className="text-7xl lg:text-9xl font-display text-mda-maroon leading-[0.8] tracking-tighter uppercase">
+                <h2 className="text-7xl lg:text-9xl font-display text-mda-maroon leading-[0.8] er uppercase">
                   SKILLS <br />
                   <span className="text-mda-pink italic font-serif normal-case text-glow">
                     Forge
@@ -102,7 +102,7 @@ const YouthPage = () => {
                     <div className="w-14 h-14 bg-mda-maroon rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110">
                       <item.icon size={28} className="text-mda-pink" />
                     </div>
-                    <span className="font-display text-2xl text-mda-maroon uppercase italic tracking-tighter">
+                    <span className="font-display text-2xl text-mda-maroon uppercase italic er">
                       {item.text}
                     </span>
                   </div>
@@ -113,7 +113,12 @@ const YouthPage = () => {
             <div className="relative group">
               <div className="aspect-[4/5] glass-card p-4 rounded-[4rem] group-hover:-rotate-2 transition-all duration-1000 overflow-hidden shadow-2xl">
                 <img
-                  src={new URL("../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg", import.meta.url).href}
+                  src={
+                    new URL(
+                      "../../assets/gallery/524445973_1341760967957245_7840297303174955587_n.jpg",
+                      import.meta.url,
+                    ).href
+                  }
                   className="w-full h-full rounded-[3.5rem] object-cover group-hover:scale-110 transition-transform duration-[2s]"
                   alt="Training"
                 />
@@ -132,7 +137,12 @@ const YouthPage = () => {
             <div className="aspect-video glass-card p-4 rounded-[4rem] overflow-hidden group shadow-2xl">
               <div className="w-full h-full rounded-[3.5rem] overflow-hidden">
                 <img
-                  src={new URL("../../assets/gallery/505730882_1301467045319971_4163705806737903282_n.jpg", import.meta.url).href}
+                  src={
+                    new URL(
+                      "../../assets/gallery/505730882_1301467045319971_4163705806737903282_n.jpg",
+                      import.meta.url,
+                    ).href
+                  }
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2s]"
                   alt="Mentorship"
                 />
@@ -146,7 +156,7 @@ const YouthPage = () => {
                   Enterprise Engine
                 </span>
               </div>
-              <h2 className="text-7xl lg:text-9xl font-display leading-[0.8] tracking-tighter uppercase whitespace-pre-line">
+              <h2 className="text-7xl lg:text-9xl font-display leading-[0.8] er uppercase whitespace-pre-line">
                 MASTERS OF <br />
                 <span className="text-mda-pink italic font-serif normal-case text-glow">
                   Industry
@@ -186,7 +196,7 @@ const YouthPage = () => {
                 <Trophy size={32} className="text-mda-pink" />
               </div>
               <div className="space-y-6">
-                <h3 className="text-5xl font-display text-mda-maroon uppercase italic tracking-tighter leading-none">
+                <h3 className="text-5xl font-display text-mda-maroon uppercase italic er leading-none">
                   Leadership <br /> & Athletics
                 </h3>
                 <p className="font-body text-xl text-mda-dark/40 leading-relaxed group-hover:text-mda-dark/60 transition-colors">
@@ -211,7 +221,7 @@ const YouthPage = () => {
                 <BookOpen size={32} className="text-mda-pink" />
               </div>
               <div className="space-y-6">
-                <h3 className="text-5xl font-display uppercase italic tracking-tighter leading-none">
+                <h3 className="text-5xl font-display uppercase italic er leading-none">
                   Academic <br /> <span className="text-mda-pink">Grants</span>
                 </h3>
                 <p className="font-body text-xl text-black/50 leading-relaxed group-hover:text-black/70 transition-colors">
