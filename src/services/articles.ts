@@ -80,6 +80,17 @@ export async function listArticles(): Promise<Article[]> {
   return (data as Row[]).map(toArticle);
 }
 
+/** Public site: only published articles. */
+export async function listPublishedArticles(): Promise<Article[]> {
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("status", "Published")
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data as Row[]).map(toArticle);
+}
+
 export async function getArticle(id: string): Promise<Article | null> {
   const { data, error } = await supabase
     .from("articles")

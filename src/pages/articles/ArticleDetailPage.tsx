@@ -11,7 +11,7 @@ import {
 import SEO from "../../components/common/SEO";
 import ArticleContent from "../../components/common/ArticleContent";
 import { type Article } from "../../data/articles";
-import { getArticleBySlug, listArticles } from "../../services/articles";
+import { getArticleBySlug, listPublishedArticles } from "../../services/articles";
 import { articlePath } from "../../lib/slug";
 
 const ArticleDetailPage = () => {
@@ -24,19 +24,14 @@ const ArticleDetailPage = () => {
   useEffect(() => {
     if (!slug) return;
 
-    Promise.all([getArticleBySlug(slug), listArticles()])
-      .then(([found, all]) => {
-        const published = all.filter(
-          (a) => !a.status || a.status === "Published",
-        );
+    Promise.all([getArticleBySlug(slug), listPublishedArticles()])
+      .then(([found, published]) => {
         if (!found || found.status === "Draft" || found.status === "Scheduled") {
           setNotFound(true);
           return;
         }
         setArticle(found);
-        setRelated(
-          published.filter((a) => a.id !== found.id).slice(0, 3),
-        );
+        setRelated(published.filter((a) => a.id !== found.id).slice(0, 3));
       })
       .catch(() => setNotFound(true))
       .finally(() => setLoading(false));

@@ -5,7 +5,7 @@ export const makeEmptyArticle = (): Partial<Article> => ({
   summary: "",
   content: "",
   category: "News",
-  status: "Draft",
+  status: "Published",
   author: "",
   image: "",
   date: new Date().toLocaleDateString("en-US", {

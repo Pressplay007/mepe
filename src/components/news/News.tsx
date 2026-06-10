@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Newspaper, ArrowRight } from "lucide-react";
 import type { Article } from "../../data/articles";
-import { listArticles } from "../../services/articles";
+import { listPublishedArticles } from "../../services/articles";
 import { articlePath } from "../../lib/slug";
 
 const News = () => {
@@ -12,14 +12,12 @@ const News = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    listArticles()
-      .then((data) => {
-        const published = data.filter(
-          (a) => !a.status || a.status === "Published",
-        );
-        setItems(published);
+    listPublishedArticles()
+      .then(setItems)
+      .catch((err) => {
+        console.error("[News] Failed to load articles:", err);
+        setItems([]);
       })
-      .catch(() => setItems([]))
       .finally(() => setLoading(false));
   }, []);
 

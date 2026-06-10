@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Newspaper, User } from "lucide-react";
 import SEO from "../../components/common/SEO";
 import { type Article } from "../../data/articles";
-import { listArticles } from "../../services/articles";
+import { listPublishedArticles } from "../../services/articles";
 import { articlePath } from "../../lib/slug";
 
 const CategoryBadge = ({ category }: { category: string }) => (
@@ -120,14 +120,12 @@ const ArticlesPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    listArticles()
-      .then((data) => {
-        const published = data.filter(
-          (a) => !a.status || a.status === "Published",
-        );
-        setArticles(published);
+    listPublishedArticles()
+      .then(setArticles)
+      .catch((err) => {
+        console.error("[Articles] Failed to load articles:", err);
+        setArticles([]);
       })
-      .catch(() => setArticles([]))
       .finally(() => setLoading(false));
   }, []);
 
