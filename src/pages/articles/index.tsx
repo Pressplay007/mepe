@@ -1,123 +1,114 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Newspaper, User } from "lucide-react";
+import {
+  ArrowRight,
+  Newspaper,
+  Search,
+  LayoutGrid,
+  List,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import SEO from "../../components/common/SEO";
 import { type Article } from "../../data/articles";
 import { listPublishedArticles } from "../../services/articles";
 import { articlePath } from "../../lib/slug";
+import { cn } from "@/lib/utils";
 
-const CategoryBadge = ({ category }: { category: string }) => (
-  <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-mda-pink/10 text-mda-pink rounded-full">
-    {category}
-  </span>
-);
+const PAGE_SIZE = 9;
+type ViewMode = "grid" | "list";
 
 const ArticleCard = ({
   article,
-  featured = false,
+  view,
 }: {
   article: Article;
-  featured?: boolean;
+  view: ViewMode;
 }) => {
-  if (featured) {
-    return (
-      <Link
-        to={articlePath(article)}
-        className="group grid lg:grid-cols-2 gap-0 rounded-[2rem] overflow-hidden bg-mda-maroon shadow-2xl shadow-mda-maroon/20 mb-16 md:mb-20 animate-reveal"
-      >
-        <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center order-2 lg:order-1">
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-white/10 text-mda-pink rounded-full">
-              Featured
-            </span>
-            <CategoryBadge category={article.category} />
-          </div>
-          <p className="text-mda-pink/80 font-display text-lg uppercase tracking-widest mb-4">
-            {article.date}
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-white leading-tight mb-6 group-hover:text-mda-pink transition-colors">
-            {article.title}
-          </h2>
-          <p className="font-body text-white/60 text-base md:text-lg leading-relaxed line-clamp-3 mb-8">
-            {article.summary}
-          </p>
-          {article.author && (
-            <p className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/40 mb-8">
-              <User size={12} />
-              {article.author}
-            </p>
-          )}
-          <span className="inline-flex items-center gap-3 text-white font-bold uppercase tracking-widest text-xs group-hover:gap-5 transition-all">
-            Read full story
-            <ArrowRight size={16} className="text-mda-pink" />
-          </span>
+  const imageBlock = (
+    <div
+      className={cn(
+        "relative overflow-hidden bg-mda-cream shrink-0",
+        view === "grid"
+          ? "aspect-[16/10] w-full rounded-xl"
+          : "w-full sm:w-56 md:w-72 aspect-[16/10] sm:aspect-auto sm:min-h-[160px] rounded-xl sm:rounded-2xl",
+      )}
+    >
+      {article.image ? (
+        <img
+          src={article.image}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center bg-mda-maroon/5">
+          <Newspaper className="w-10 h-10 text-mda-maroon/15" />
         </div>
-        <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[420px] order-1 lg:order-2 overflow-hidden">
-          {article.image ? (
-            <img
-              src={article.image}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-mda-pink/10 flex items-center justify-center">
-              <Newspaper size={64} className="text-white/20" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-mda-maroon/40 via-transparent to-transparent lg:bg-gradient-to-l lg:from-mda-maroon/60 lg:via-transparent lg:to-transparent" />
-        </div>
-      </Link>
-    );
-  }
+      )}
+    </div>
+  );
 
-  return (
+  const meta = (
+    <p className="text-xs font-semibold uppercase tracking-wide">
+      <span className="text-amber-600">{article.category}</span>
+      <span className="text-mda-maroon/25 mx-2">•</span>
+      <span className="text-mda-maroon/40">{article.date}</span>
+    </p>
+  );
+
+  const body = (
+    <div
+      className={cn(
+        "flex flex-col justify-center min-w-0",
+        view === "grid" ? "gap-2 pt-4" : "gap-2 p-5 md:p-6 flex-1",
+      )}
+    >
+      {meta}
+      <h3
+        className={cn(
+          "font-bold text-mda-maroon leading-snug group-hover:text-mda-pink transition-colors",
+          view === "grid"
+            ? "text-lg md:text-xl line-clamp-2"
+            : "text-xl md:text-2xl line-clamp-2",
+        )}
+      >
+        {article.title}
+      </h3>
+      {view === "list" && article.summary && (
+        <p className="text-sm text-mda-maroon/55 leading-relaxed line-clamp-2">
+          {article.summary}
+        </p>
+      )}
+      <p className="text-sm text-mda-maroon/40">
+        {article.author ? `By ${article.author}` : "Mepe Development Association"}
+      </p>
+    </div>
+  );
+
+  const card = (
     <Link
       to={articlePath(article)}
-      className="group flex flex-col rounded-[1.5rem] overflow-hidden bg-white border border-mda-maroon/5 shadow-sm hover:shadow-xl hover:shadow-mda-maroon/5 transition-all duration-500 animate-reveal h-full"
+      className={cn(
+        "group block",
+        view === "list" &&
+          "flex flex-col sm:flex-row gap-4 sm:gap-6 bg-white rounded-2xl border border-mda-maroon/5 p-4 sm:p-0 sm:overflow-hidden hover:shadow-md transition-shadow",
+      )}
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-mda-cream">
-        {article.image ? (
-          <img
-            src={article.image}
-            alt=""
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-mda-maroon/5">
-            <Newspaper size={40} className="text-mda-maroon/15" />
-          </div>
-        )}
-        <div className="absolute top-4 left-4">
-          <CategoryBadge category={article.category} />
-        </div>
-      </div>
-      <div className="flex flex-col flex-1 p-6 md:p-8">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-mda-maroon/40 mb-3">
-          {article.date}
-        </p>
-        <h3 className="text-2xl md:text-3xl font-display text-mda-maroon leading-tight mb-4 group-hover:text-mda-pink transition-colors line-clamp-2">
-          {article.title}
-        </h3>
-        <p className="font-body text-mda-maroon/60 text-sm md:text-base leading-relaxed line-clamp-3 flex-1">
-          {article.summary || "Read the full article for more."}
-        </p>
-        {article.author && (
-          <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-mda-maroon/30">
-            By {article.author}
-          </p>
-        )}
-        <div className="mt-6 pt-6 border-t border-mda-maroon/5 flex items-center gap-2 text-mda-maroon font-bold uppercase tracking-widest text-[10px] group-hover:text-mda-pink transition-colors">
-          Read article
-          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-        </div>
-      </div>
+      {imageBlock}
+      {body}
     </Link>
   );
+
+  return view === "grid" ? card : <article>{card}</article>;
 };
 
 const ArticlesPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [view, setView] = useState<ViewMode>("grid");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     listPublishedArticles()
@@ -129,7 +120,31 @@ const ArticlesPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const [featured, ...rest] = articles;
+  const categories = useMemo(() => {
+    const cats = [...new Set(articles.map((a) => a.category))].filter(Boolean);
+    return ["All", ...cats.sort()];
+  }, [articles]);
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return articles.filter((item) => {
+      if (activeCategory !== "All" && item.category !== activeCategory)
+        return false;
+      if (!q) return true;
+      return (
+        item.title.toLowerCase().includes(q) ||
+        item.summary.toLowerCase().includes(q) ||
+        (item.author?.toLowerCase().includes(q) ?? false)
+      );
+    });
+  }, [articles, activeCategory, search]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, activeCategory, view]);
 
   return (
     <div className="bg-mda-cream min-h-screen">
@@ -166,62 +181,147 @@ const ArticlesPage = () => {
         </div>
       </section>
 
-      {/* Articles */}
-      <section className="py-16 md:py-24 px-4 md:px-8">
+      {/* Listing */}
+      <section className="py-12 md:py-20 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 md:mb-10">
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(cat)}
+                  className={cn(
+                    "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+                    activeCategory === cat
+                      ? "bg-mda-pink/15 border-mda-pink/30 text-mda-maroon"
+                      : "bg-white border-mda-maroon/10 text-mda-maroon/55 hover:border-mda-maroon/25 hover:text-mda-maroon",
+                  )}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="relative flex-1 sm:w-64 lg:w-72">
+                <Search
+                  size={16}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-mda-maroon/30"
+                />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search articles..."
+                  className="w-full pl-10 pr-4 py-2.5 rounded-full border border-mda-maroon/10 bg-white text-sm text-mda-maroon placeholder:text-mda-maroon/35 focus:outline-none focus:border-mda-pink/40 transition-colors"
+                />
+              </div>
+
+              <div className="flex items-center gap-1 p-1 rounded-full border border-mda-maroon/10 bg-mda-cream/30 self-end sm:self-auto">
+                <button
+                  type="button"
+                  onClick={() => setView("grid")}
+                  aria-label="Grid view"
+                  className={cn(
+                    "p-2 rounded-full transition-colors",
+                    view === "grid"
+                      ? "bg-mda-maroon text-white"
+                      : "text-mda-maroon/50 hover:text-mda-maroon",
+                  )}
+                >
+                  <LayoutGrid size={16} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setView("list")}
+                  aria-label="List view"
+                  className={cn(
+                    "p-2 rounded-full transition-colors",
+                    view === "list"
+                      ? "bg-mda-maroon text-white"
+                      : "text-mda-maroon/50 hover:text-mda-maroon",
+                  )}
+                >
+                  <List size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+
           {loading ? (
             <div className="flex justify-center py-24">
               <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
             </div>
-          ) : articles.length > 0 ? (
+          ) : paginated.length > 0 ? (
             <>
-              {featured && <ArticleCard article={featured} featured />}
+              <div
+                className={cn(
+                  view === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
+                    : "flex flex-col gap-4 md:gap-5",
+                )}
+              >
+                {paginated.map((article) => (
+                  <ArticleCard key={article.id} article={article} view={view} />
+                ))}
+              </div>
 
-              {rest.length > 0 && (
-                <>
-                  <div className="flex items-end justify-between gap-4 mb-10">
-                    <div>
-                      <h2 className="text-3xl md:text-4xl font-display text-mda-maroon uppercase">
-                        More <span className="text-mda-pink">Stories</span>
-                      </h2>
-                      <div className="h-1 w-16 bg-mda-pink mt-3" />
-                    </div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-mda-maroon/40 hidden sm:block">
-                      {articles.length} article{articles.length !== 1 ? "s" : ""}
-                    </p>
+              {filtered.length > PAGE_SIZE && (
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-8 border-t border-mda-maroon/5">
+                  <p className="text-sm text-mda-maroon/45">
+                    Showing {(page - 1) * PAGE_SIZE + 1}–
+                    {Math.min(page * PAGE_SIZE, filtered.length)} of{" "}
+                    {filtered.length} articles
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page === 1}
+                      className="p-2 rounded-full border border-mda-maroon/10 text-mda-maroon disabled:opacity-30 hover:bg-mda-cream transition-colors"
+                      aria-label="Previous page"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <span className="text-sm font-medium text-mda-maroon px-2">
+                      {page} / {totalPages}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={page === totalPages}
+                      className="p-2 rounded-full border border-mda-maroon/10 text-mda-maroon disabled:opacity-30 hover:bg-mda-cream transition-colors"
+                      aria-label="Next page"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {rest.map((article, index) => (
-                      <div
-                        key={article.id}
-                        style={{ animationDelay: `${index * 80}ms` }}
-                      >
-                        <ArticleCard article={article} />
-                      </div>
-                    ))}
-                  </div>
-                </>
+                </div>
               )}
             </>
           ) : (
-            <div className="bg-white rounded-[2rem] border border-mda-maroon/5 p-12 md:p-24 text-center shadow-sm">
-              <div className="w-20 h-20 rounded-3xl bg-mda-cream flex items-center justify-center mx-auto mb-8">
-                <Newspaper size={36} className="text-mda-maroon/20" />
-              </div>
-              <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase mb-4">
-                No articles yet
+            <div className="rounded-2xl border border-mda-maroon/5 bg-mda-cream/30 p-12 md:p-20 text-center">
+              <Newspaper className="w-10 h-10 text-mda-maroon/15 mx-auto mb-4" />
+              <h3 className="text-xl md:text-2xl font-bold text-mda-maroon mb-2">
+                {articles.length === 0
+                  ? "No articles yet"
+                  : "No articles match your search"}
               </h3>
-              <p className="font-body text-mda-maroon/50 max-w-md mx-auto mb-8">
-                Published articles will appear here once they are posted by the
-                MDA team.
+              <p className="text-sm text-mda-maroon/40 max-w-md mx-auto mb-8">
+                {articles.length === 0
+                  ? "Published articles will appear here once they are posted."
+                  : "Try a different category or search term."}
               </p>
-              <Link
-                to="/announcements"
-                className="inline-flex items-center gap-2 text-mda-pink font-bold uppercase tracking-widest text-xs hover:text-mda-maroon transition-colors"
-              >
-                View official announcements
-                <ArrowRight size={14} />
-              </Link>
+              {articles.length === 0 && (
+                <Link
+                  to="/announcements"
+                  className="inline-flex items-center gap-2 text-mda-pink font-bold uppercase tracking-widest text-xs hover:text-mda-maroon transition-colors"
+                >
+                  View official announcements
+                  <ArrowRight size={14} />
+                </Link>
+              )}
             </div>
           )}
         </div>
