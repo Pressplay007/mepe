@@ -20,9 +20,9 @@ const LandingPage = () => {
         <ChairmanWelcome />
         <History />
         <Events />
-        <Projects />
         <News />
         <Team />
+        <Projects />
         <FinalCTA />
       </div>
     </>

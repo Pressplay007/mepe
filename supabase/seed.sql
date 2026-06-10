@@ -55,3 +55,10 @@ insert into public.announcements (title, date_label, category, summary, content,
    'The Mepe Development Association is pleased to formally announce the composition of its newly constituted Executive Committee.',
    true, 'Published')
 on conflict do nothing;
+
+insert into public.articles (title, slug, date_label, category, summary, content, author, status) values
+  ('Building a Stronger Mepe Together', 'building-a-stronger-mepe-together', 'June 2026', 'Community',
+   'How the MDA is bringing residents together through development projects, youth programs, and cultural initiatives.',
+   'The Mepe Development Association continues to champion community-led growth across the traditional area. From infrastructure projects to youth empowerment workshops, our members are working hand in hand to create lasting change for generations to come.',
+   'Francis Ladzaglah', 'Published')
+on conflict do nothing;

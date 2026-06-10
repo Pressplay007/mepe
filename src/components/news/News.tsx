@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react";
-import type { Announcement } from "../../data/announcements";
-import { listAnnouncements } from "../../services/announcements";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { Search, Newspaper, ArrowRight } from "lucide-react";
+import type { Article } from "../../data/articles";
+import { listArticles } from "../../services/articles";
+import { articlePath } from "../../lib/slug";
 
 const News = () => {
-  const [items, setItems] = useState<Announcement[]>([]);
+  const [items, setItems] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    listAnnouncements()
+    listArticles()
       .then((data) => {
         const published = data.filter(
           (a) => !a.status || a.status === "Published",
@@ -18,72 +23,145 @@ const News = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  const categories = useMemo(() => {
+    const cats = [...new Set(items.map((a) => a.category))].filter(Boolean);
+    return ["All", ...cats.sort()];
+  }, [items]);
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return items.filter((item) => {
+      if (activeCategory !== "All" && item.category !== activeCategory)
+        return false;
+      if (!q) return true;
+      return (
+        item.title.toLowerCase().includes(q) ||
+        item.summary.toLowerCase().includes(q) ||
+        (item.author?.toLowerCase().includes(q) ?? false)
+      );
+    });
+  }, [items, activeCategory, search]);
+
+  const displayed = filtered.slice(0, 9);
+
   return (
-    <section className="py-16 md:py-24 bg-white min-h-[60vh]">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-10 md:mb-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <div className="inline-block px-4 py-1.5 bg-mda-maroon/5 border border-mda-maroon/10 rounded-full mb-4">
-              <span className="text-[10px] md:text-xs font-bold tracking-widest text-mda-maroon uppercase">
-                Latest Updates
-              </span>
-            </div>
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-display text-mda-maroon leading-none">
-              NEWS & ARTICLES
-            </h2>
-          </div>
-          <div className="w-24 h-1 bg-mda-pink hidden md:block" />
-        </div>
-      </div>
-
+    <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {loading ? (
-          <div className="flex justify-center py-16">
-            <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
-          </div>
-        ) : items.length > 0 ? (
-          <div className="grid grid-cols-1 gap-12">
-            {items.map((item) => (
-              <div
-                key={item.id}
-                className="bg-mda-cream/30 rounded-[2.5rem] p-8 md:p-16 border border-mda-maroon/5 shadow-sm hover:shadow-xl transition-all duration-500"
+        {/* Header */}
+        <h2 className="text-center text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-mda-maroon tracking-tight mb-10 md:mb-12">
+          Latest Articles
+        </h2>
+
+        {/* Filters + search */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-10 md:mb-12">
+          <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                  activeCategory === cat
+                    ? "bg-mda-pink/15 border-mda-pink/30 text-mda-maroon"
+                    : "bg-white border-mda-maroon/10 text-mda-maroon/55 hover:border-mda-maroon/25 hover:text-mda-maroon"
+                }`}
               >
-                <div className="max-w-4xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="bg-mda-maroon text-mda-cream px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">
-                      {item.date}
-                    </span>
-                    <div className="h-px w-12 bg-mda-maroon/20" />
-                  </div>
-
-                  <h3 className="text-3xl md:text-5xl lg:text-6xl font-display text-mda-maroon mb-8 leading-tight">
-                    {item.title}
-                  </h3>
-
-                  <div className="space-y-6">
-                    <p className="font-body text-mda-dark/80 text-lg md:text-xl leading-relaxed">
-                      {item.summary}
-                    </p>
-                  </div>
-
-                  <div className="mt-12 flex items-center gap-4">
-                    <div className="w-12 h-1 bg-mda-pink" />
-                    <span className="font-display text-mda-maroon text-xl uppercase tracking-widest">
-                      Official Press Release
-                    </span>
-                  </div>
-                </div>
-              </div>
+                {cat}
+              </button>
             ))}
           </div>
+
+          <div className="relative w-full lg:w-72 xl:w-80 shrink-0">
+            <Search
+              size={16}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-mda-maroon/30"
+            />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search articles, keyword..."
+              className="w-full pl-10 pr-4 py-2.5 rounded-full border border-mda-maroon/10 bg-white text-sm text-mda-maroon placeholder:text-mda-maroon/35 focus:outline-none focus:border-mda-pink/40 transition-colors"
+            />
+          </div>
+        </div>
+
+        {/* Grid */}
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-mda-maroon/20 border-t-mda-maroon rounded-full animate-spin" />
+          </div>
+        ) : displayed.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {displayed.map((item) => (
+                <Link
+                  key={item.id}
+                  to={articlePath(item)}
+                  className="group flex flex-col gap-4"
+                >
+                  <div className="aspect-[16/10] rounded-xl overflow-hidden bg-mda-cream">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-mda-maroon/5">
+                        <Newspaper
+                          size={36}
+                          className="text-mda-maroon/15"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide">
+                      <span className="text-amber-600">{item.category}</span>
+                      <span className="text-mda-maroon/25 mx-2">•</span>
+                      <span className="text-mda-maroon/40">{item.date}</span>
+                    </p>
+                    <h3 className="text-lg md:text-xl font-bold text-mda-maroon leading-snug group-hover:text-mda-pink transition-colors line-clamp-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-mda-maroon/40">
+                      {item.author ? `By ${item.author}` : "Mepe Development Association"}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {filtered.length > 9 && (
+              <p className="text-center text-sm text-mda-maroon/40 mt-8">
+                Showing 9 of {filtered.length} articles
+              </p>
+            )}
+
+            <div className="flex justify-center mt-12">
+              <Link
+                to="/articles"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-mda-maroon/10 text-sm font-semibold text-mda-maroon hover:bg-mda-pink/10 hover:border-mda-pink/30 transition-colors"
+              >
+                View all articles
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </>
         ) : (
-          <div className="bg-mda-cream/30 rounded-[2rem] md:rounded-[3rem] p-12 md:p-24 text-center border border-mda-maroon/5 shadow-sm">
-            <h3 className="text-2xl md:text-4xl font-display text-mda-maroon uppercase mb-4 italic">
-              No news available
+          <div className="rounded-2xl border border-mda-maroon/5 bg-mda-cream/30 p-12 md:p-20 text-center">
+            <Newspaper className="w-10 h-10 text-mda-maroon/15 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-mda-maroon mb-2">
+              {items.length === 0
+                ? "No articles yet"
+                : "No articles match your search"}
             </h3>
-            <p className="font-body text-mda-dark/40 tracking-widest uppercase text-[10px] md:text-xs font-bold">
-              Please check back later for the latest updates from the Mepe
-              Development Association.
+            <p className="text-sm text-mda-maroon/40 max-w-md mx-auto">
+              {items.length === 0
+                ? "Published articles will appear here once they are posted."
+                : "Try a different category or search term."}
             </p>
           </div>
         )}

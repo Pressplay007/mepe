@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import DateTimePicker from "./DateTimePicker";
+import AdminImageField from "./AdminImageField";
+import { uploadEventImage } from "../../services/events";
 
 
 interface AddEventSheetProps {
@@ -28,6 +30,7 @@ const emptyEvent: Partial<Event> = {
   location: "",
   category: "Cultural",
   status: "Upcoming",
+  image: "",
 };
 
 const AddEventSheet = ({ isOpen, onClose, onAdd }: AddEventSheetProps) => {
@@ -37,6 +40,10 @@ const AddEventSheet = ({ isOpen, onClose, onAdd }: AddEventSheetProps) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!newEvent.title || !newEvent.date) return;
+    if (!newEvent.image) {
+      toast.error("Please upload an event image.");
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -124,6 +131,12 @@ const AddEventSheet = ({ isOpen, onClose, onAdd }: AddEventSheetProps) => {
             </div>
           </div>
 
+          <AdminImageField
+            label="Event Image"
+            value={newEvent.image}
+            onChange={(url) => setNewEvent({ ...newEvent, image: url })}
+            onUpload={uploadEventImage}
+          />
 
           <div className="space-y-3">
             <label className="text-[10px] font-bold uppercase tracking-widest text-mda-maroon/40 ml-1">

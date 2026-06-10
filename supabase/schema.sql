@@ -66,6 +66,20 @@ create table if not exists public.announcements (
   created_at  timestamptz not null default now()
 );
 
+create table if not exists public.articles (
+  id          uuid primary key default gen_random_uuid(),
+  title       text not null,
+  slug        text unique,
+  date_label  text not null,
+  category    text not null default 'News',
+  summary     text not null default '',
+  content     text not null default '',
+  author      text,
+  image_url   text,
+  status      announcement_status not null default 'Draft',
+  created_at  timestamptz not null default now()
+);
+
 create table if not exists public.events (
   id          uuid primary key default gen_random_uuid(),
   title       text not null,
@@ -87,6 +101,7 @@ create table if not exists public.projects (
   description text not null default '',
   lead        text not null default '',
   budget      text,
+  image_url   text,
   created_at  timestamptz not null default now()
 );
 
@@ -97,6 +112,7 @@ create table if not exists public.media (
   url         text not null,
   type        text not null default 'Image',
   size_bytes  bigint not null default 0,
+  source      text not null,
   created_at  timestamptz not null default now()
 );
 
@@ -137,6 +153,7 @@ $$;
 alter table public.admins        enable row level security;
 alter table public.team_members  enable row level security;
 alter table public.announcements enable row level security;
+alter table public.articles      enable row level security;
 alter table public.events        enable row level security;
 alter table public.projects      enable row level security;
 alter table public.media         enable row level security;
@@ -146,7 +163,7 @@ alter table public.activity_log  enable row level security;
 do $$
 declare t text;
 begin
-  foreach t in array array['team_members','announcements','events','projects','media']
+  foreach t in array array['team_members','announcements','articles','events','projects','media']
   loop
     execute format('drop policy if exists "%s_public_read" on public.%I;', t, t);
     execute format('create policy "%s_public_read" on public.%I for select using (true);', t, t);

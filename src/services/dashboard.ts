@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabase";
 export interface DashboardStats {
   team: number;
   announcements: number;
+  articles: number;
   upcomingEvents: number;
   liveProjects: number;
 }
@@ -22,12 +23,14 @@ const baseCount = (table: string) =>
   supabase.from(table).select("*", { count: "exact", head: true });
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [team, announcements, upcomingEvents, liveProjects] = await Promise.all([
-    countOf("team_members"),
-    countOf("announcements"),
-    countOf("events", (q) => q.eq("status", "Upcoming")),
-    countOf("projects", (q) => q.eq("status", "In Progress")),
-  ]);
+  const [team, announcements, articles, upcomingEvents, liveProjects] =
+    await Promise.all([
+      countOf("team_members"),
+      countOf("announcements"),
+      countOf("articles"),
+      countOf("events", (q) => q.eq("status", "Upcoming")),
+      countOf("projects", (q) => q.eq("status", "In Progress")),
+    ]);
 
-  return { team, announcements, upcomingEvents, liveProjects };
+  return { team, announcements, articles, upcomingEvents, liveProjects };
 }

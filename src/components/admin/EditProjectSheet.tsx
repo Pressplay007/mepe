@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import AdminImageField from "./AdminImageField";
+import { uploadProjectImage } from "../../services/projects";
 
 interface EditProjectSheetProps {
   isOpen: boolean;
@@ -29,6 +31,10 @@ const EditProjectSheet = ({ isOpen, onClose, onSave, project }: EditProjectSheet
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!edited.title || !edited.lead || !project) return;
+    if (!edited.image) {
+      toast.error("Please upload a project image.");
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -113,6 +119,13 @@ const EditProjectSheet = ({ isOpen, onClose, onSave, project }: EditProjectSheet
                 placeholder="e.g. GHS 500,000" />
             </div>
           </div>
+
+          <AdminImageField
+            label="Project Image"
+            value={edited.image}
+            onChange={(url) => setEdited({ ...edited, image: url })}
+            onUpload={uploadProjectImage}
+          />
 
           <div className="space-y-3">
             <div className="flex justify-between items-center ml-1">

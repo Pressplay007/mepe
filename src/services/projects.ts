@@ -2,6 +2,19 @@ import { supabase } from "../lib/supabase";
 import type { Project } from "../data/projects";
 import { logActivity } from "./activity";
 
+const STORAGE_BUCKET = "media";
+
+export async function uploadProjectImage(file: File): Promise<string> {
+  const ext = file.name.split(".").pop() ?? "jpg";
+  const path = `projects/${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage
+    .from(STORAGE_BUCKET)
+    .upload(path, file, { cacheControl: "3600", upsert: false });
+  if (error) throw error;
+  const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
 type Row = {
   id: string;
   title: string;
@@ -11,6 +24,7 @@ type Row = {
   description: string;
   lead: string;
   budget: string | null;
+  image_url: string | null;
 };
 
 const toProject = (row: Row): Project => ({
@@ -22,6 +36,7 @@ const toProject = (row: Row): Project => ({
   description: row.description,
   lead: row.lead,
   budget: row.budget ?? undefined,
+  image: row.image_url ?? undefined,
 });
 
 const toRow = (p: Omit<Project, "id">) => ({
@@ -32,6 +47,7 @@ const toRow = (p: Omit<Project, "id">) => ({
   description: p.description,
   lead: p.lead,
   budget: p.budget ?? null,
+  image_url: p.image ?? null,
 });
 
 export async function listProjects(): Promise<Project[]> {

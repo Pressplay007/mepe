@@ -2,6 +2,19 @@ import { supabase } from "../lib/supabase";
 import type { Event } from "../data/events";
 import { logActivity } from "./activity";
 
+const STORAGE_BUCKET = "media";
+
+export async function uploadEventImage(file: File): Promise<string> {
+  const ext = file.name.split(".").pop() ?? "jpg";
+  const path = `events/${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage
+    .from(STORAGE_BUCKET)
+    .upload(path, file, { cacheControl: "3600", upsert: false });
+  if (error) throw error;
+  const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
 type Row = {
   id: string;
   title: string;

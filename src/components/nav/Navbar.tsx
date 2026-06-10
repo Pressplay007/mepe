@@ -37,6 +37,7 @@ const Navbar = () => {
       name: "News & Media",
       links: [
         { name: "Announcements", path: "/announcements" },
+        { name: "Articles", path: "/articles" },
         { name: "Gallery", path: "/gallery" },
       ]
     },

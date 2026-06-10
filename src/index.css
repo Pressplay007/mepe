@@ -180,3 +180,16 @@
 .animate-reveal {
   animation: reveal-up 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
+
+/* TipTap editor placeholder */
+.tiptap p.is-editor-empty:first-child::before {
+  color: rgb(93 26 26 / 0.35);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap:focus {
+  outline: none;
+}

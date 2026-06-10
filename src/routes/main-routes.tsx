@@ -12,6 +12,8 @@ import PrivacyPolicy from "../pages/legal/PrivacyPolicy";
 import TermsOfService from "../pages/legal/TermsOfService";
 import GalleryPage from "../pages/gallery";
 import AnnouncementsPage from "../pages/announcements";
+import ArticlesPage from "../pages/articles";
+import ArticleDetailPage from "../pages/articles/ArticleDetailPage";
 
 // Admin Imports
 import AdminLayout from "../layouts/admin/AdminLayout";
@@ -19,6 +21,9 @@ import LoginPage from "../pages/admin/LoginPage";
 import Dashboard from "../pages/admin/Dashboard";
 import TeamManagement from "../pages/admin/TeamManagement";
 import AnnouncementsManagement from "../pages/admin/AnnouncementsManagement";
+import ArticlesManagement from "../pages/admin/ArticlesManagement";
+import AddArticlePage from "../pages/admin/AddArticlePage";
+import EditArticlePage from "../pages/admin/EditArticlePage";
 import EventsManagement from "../pages/admin/EventsManagement";
 import ProjectsManagement from "../pages/admin/ProjectsManagement";
 import MediaManagement from "../pages/admin/MediaManagement";
@@ -44,6 +49,8 @@ const MainRoutes = () => {
       <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/gallery" element={<GalleryPage />} />
       <Route path="/announcements" element={<AnnouncementsPage />} />
+      <Route path="/articles" element={<ArticlesPage />} />
+      <Route path="/articles/:slug" element={<ArticleDetailPage />} />
 
       {/* Admin Routes */}
       <Route path="/admin/login" element={<LoginPage />} />
@@ -52,6 +59,9 @@ const MainRoutes = () => {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/team" element={<TeamManagement />} />
           <Route path="/admin/announcements" element={<AnnouncementsManagement />} />
+          <Route path="/admin/articles" element={<ArticlesManagement />} />
+          <Route path="/admin/articles/new" element={<AddArticlePage />} />
+          <Route path="/admin/articles/:id/edit" element={<EditArticlePage />} />
           <Route path="/admin/events" element={<EventsManagement />} />
           <Route path="/admin/projects" element={<ProjectsManagement />} />
           <Route path="/admin/media" element={<MediaManagement />} />

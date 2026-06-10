@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Users,
   Megaphone,
+  Newspaper,
   Calendar,
   FolderKanban,
   TrendingUp,
@@ -28,6 +29,7 @@ const Dashboard = () => {
   const [counts, setCounts] = useState<DashboardStats>({
     team: 0,
     announcements: 0,
+    articles: 0,
     upcomingEvents: 0,
     liveProjects: 0,
   });
@@ -52,6 +54,13 @@ const Dashboard = () => {
       icon: Megaphone,
       change: "Published & drafts",
       color: "bg-mda-pink",
+    },
+    {
+      name: "Articles",
+      value: String(counts.articles),
+      icon: Newspaper,
+      change: "News & stories",
+      color: "bg-orange-500",
     },
     {
       name: "Upcoming Events",
@@ -84,7 +93,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {stats.map((stat) => (
           <div
             key={stat.name}
@@ -178,6 +187,23 @@ const Dashboard = () => {
               <Megaphone
                 size={20}
                 className="group-hover:rotate-12 transition-transform"
+              />
+            </Link>
+            <Link
+              to="/admin/articles/new"
+              className="bg-white border border-mda-maroon/5 p-6 rounded-[15px] flex items-center justify-between hover:scale-[1.02] transition-all shadow-sm group"
+            >
+              <div className="text-left">
+                <p className="text-xs font-bold uppercase tracking-widest text-mda-maroon mb-1">
+                  New Article
+                </p>
+                <p className="text-[9px] text-mda-maroon/40 font-medium">
+                  Publish news & stories
+                </p>
+              </div>
+              <Newspaper
+                size={20}
+                className="text-mda-maroon/20 group-hover:rotate-12 transition-transform"
               />
             </Link>
             <Link

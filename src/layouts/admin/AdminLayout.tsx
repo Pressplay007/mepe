@@ -41,7 +41,10 @@ const AdminLayout = () => {
             </button>
             <h2 className="text-xs sm:text-sm font-bold text-mda-maroon uppercase tracking-widest truncate">
               {menuItems.find((item) => item.path === location.pathname)
-                ?.name || "Admin"}
+                ?.name ||
+                (location.pathname.startsWith("/admin/articles")
+                  ? "Articles"
+                  : "Admin")}
             </h2>
           </div>
 
@@ -62,7 +65,14 @@ const AdminLayout = () => {
 
         {/* Content Area */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-10">
-          <div className="max-w-7xl mx-auto w-full">
+          <div
+            className={`mx-auto w-full ${
+              location.pathname.includes("/admin/articles/new") ||
+              location.pathname.includes("/edit")
+                ? "max-w-6xl"
+                : "max-w-7xl"
+            }`}
+          >
             <Outlet />
           </div>
         </div>

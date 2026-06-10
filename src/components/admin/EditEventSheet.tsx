@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import DateTimePicker from "./DateTimePicker";
+import AdminImageField from "./AdminImageField";
+import { uploadEventImage } from "../../services/events";
 
 
 interface EditEventSheetProps {
@@ -30,6 +32,10 @@ const EditEventSheet = ({ isOpen, onClose, onSave, event }: EditEventSheetProps)
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!edited.title || !edited.date || !event) return;
+    if (!edited.image) {
+      toast.error("Please upload an event image.");
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -84,8 +90,12 @@ const EditEventSheet = ({ isOpen, onClose, onSave, event }: EditEventSheetProps)
             </div>
           </div>
 
-
-
+          <AdminImageField
+            label="Event Image"
+            value={edited.image}
+            onChange={(url) => setEdited({ ...edited, image: url })}
+            onUpload={uploadEventImage}
+          />
 
           <div className="space-y-3">
             <label className="text-[10px] font-bold uppercase tracking-widest text-mda-maroon/40 ml-1">Description</label>

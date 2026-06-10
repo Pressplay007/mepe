@@ -1,6 +1,20 @@
 import { supabase } from "../lib/supabase";
+import { compareDateLabelsDesc } from "../lib/dateLabel";
 import type { Announcement } from "../data/announcements";
 import { logActivity } from "./activity";
+
+const isPublished = (a: Announcement) => !a.status || a.status === "Published";
+
+export function getLatestPublishedAnnouncement(
+  announcements: Announcement[],
+): Announcement | null {
+  const published = announcements.filter(isPublished);
+  if (published.length === 0) return null;
+
+  return [...published].sort((a, b) =>
+    compareDateLabelsDesc(a.date, b.date),
+  )[0];
+}
 
 type Row = {
   id: string;

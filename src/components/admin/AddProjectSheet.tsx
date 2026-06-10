@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import AdminImageField from "./AdminImageField";
+import { uploadProjectImage } from "../../services/projects";
 
 
 interface AddProjectSheetProps {
@@ -29,6 +31,7 @@ const emptyProject: Partial<Project> = {
   description: "",
   lead: "",
   budget: "",
+  image: "",
 };
 
 const AddProjectSheet = ({ isOpen, onClose, onAdd }: AddProjectSheetProps) => {
@@ -38,6 +41,10 @@ const AddProjectSheet = ({ isOpen, onClose, onAdd }: AddProjectSheetProps) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!newProject.title || !newProject.lead) return;
+    if (!newProject.image) {
+      toast.error("Please upload a project image.");
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -177,6 +184,13 @@ const AddProjectSheet = ({ isOpen, onClose, onAdd }: AddProjectSheetProps) => {
               />
             </div>
           </div>
+
+          <AdminImageField
+            label="Project Image"
+            value={newProject.image}
+            onChange={(url) => setNewProject({ ...newProject, image: url })}
+            onUpload={uploadProjectImage}
+          />
 
           <div className="space-y-3">
             <div className="flex justify-between items-center ml-1">

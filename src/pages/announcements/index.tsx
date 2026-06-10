@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SEO from "../../components/common/SEO";
 import { type Announcement } from "../../data/announcements";
+import { compareDateLabelsDesc } from "../../lib/dateLabel";
 import { listAnnouncements } from "../../services/announcements";
 import { X, FileText, Calendar, Tag } from "lucide-react";
 
@@ -13,9 +14,9 @@ const AnnouncementsPage = () => {
   useEffect(() => {
     listAnnouncements()
       .then((data) => {
-        const published = data.filter(
-          (a) => !a.status || a.status === "Published",
-        );
+        const published = data
+          .filter((a) => !a.status || a.status === "Published")
+          .sort((a, b) => compareDateLabelsDesc(a.date, b.date));
         setAnnouncements(published);
       })
       .catch(() => setAnnouncements([]))

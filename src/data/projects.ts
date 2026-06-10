@@ -7,6 +7,7 @@ export interface Project {
   description: string;
   lead: string;
   budget?: string;
+  image?: string;
 }
 
 export const projects: Project[] = [

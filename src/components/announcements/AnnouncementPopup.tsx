@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { X, ArrowRight, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { type Announcement } from '../../data/announcements';
-import { listAnnouncements } from '../../services/announcements';
+import {
+  getLatestPublishedAnnouncement,
+  listAnnouncements,
+} from "../../services/announcements";
 
 const AnnouncementPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,11 +18,9 @@ const AnnouncementPopup = () => {
 
     listAnnouncements()
       .then((data) => {
-        const published = data.find(
-          (a) => !a.status || a.status === "Published",
-        );
-        if (published) {
-          setLatest(published);
+        const announcement = getLatestPublishedAnnouncement(data);
+        if (announcement) {
+          setLatest(announcement);
           timer = setTimeout(() => setIsVisible(true), 2000);
         }
       })
